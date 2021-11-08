@@ -88,7 +88,7 @@ class _LibraryState extends State<Library> {
                             style: TextStyle(
                                 color: Colors.grey[700],
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w400,
                                 letterSpacing: .5),
                           )),
                       IconButton(
@@ -117,7 +117,7 @@ class _LibraryState extends State<Library> {
                             style: TextStyle(
                                 color: Colors.grey[700],
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w400,
                                 letterSpacing: .5),
                           )),
                       IconButton(
@@ -156,7 +156,7 @@ class _LibraryState extends State<Library> {
                   letterSpacing: 1,
                   color: Colors.black,
                   fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w400),
             ),
             content: TextField(
               cursorColor: Colors.white,
@@ -170,7 +170,7 @@ class _LibraryState extends State<Library> {
                   hintText: "Playlist Name",
                   hintStyle: TextStyle(
                       color: Colors.grey[600],
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       letterSpacing: 1)),
             ),
             actions: [
