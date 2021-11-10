@@ -24,24 +24,6 @@ class _LibraryState extends State<Library> {
                     height: 50,
                     width: 90,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.blueGrey,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 6.0,
-                            spreadRadius: 1.0,
-                          )
-                        ]),
                     child: const Text(
                       "Library",
                       style: TextStyle(
@@ -51,19 +33,18 @@ class _LibraryState extends State<Library> {
                           decoration: TextDecoration.underline,
                           decorationColor: Colors.green,
                           decorationThickness: 3,
-                          fontSize: 20,
+                          fontSize: 25,
+                          letterSpacing: .7,
                           fontWeight: FontWeight.bold,
                           color: Colors.transparent),
                     ),
                   ),
                   Container(
-                    height: 50,
-                    width: 40,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(100)),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.blueGrey,
@@ -81,34 +62,80 @@ class _LibraryState extends State<Library> {
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          print("back pressed");
                         },
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Colors.black,
+                          size: 30,
+                        )),
                   ),
                 ],
               ),
+              SizedBox(height: 30),
               Column(
                 children: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Favourites()));
-                        print("Textbutton pressed");
-                      },
-                      child: Row(
-                        children: const [
-                          Text(
-                            "Favourites",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: .5),
-                          ),
-                        ],
-                      )),
+                  Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 360,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(4.0, 4.0),
+                                blurRadius: .0,
+                                spreadRadius: 1.0,
+                              ),
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(-4.0, -4.0),
+                                blurRadius: .0,
+                                spreadRadius: 1.0,
+                              )
+                            ]),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Favourites()));
+                            },
+                            child: Text(
+                              "Favourites",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            )),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 30),
+                  // TextButton(
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => const Favourites()));
+                  //       print("Textbutton pressed");
+                  //     },
+                  //     child: Row(
+                  //       children: const [
+                  //         Text(
+                  //           "Favourites",
+                  //           style: TextStyle(
+                  //               color: Colors.black,
+                  //               fontSize: 18,
+                  //               fontWeight: FontWeight.bold,
+                  //               letterSpacing: .5),
+                  //         ),
+                  //       ],
+                  //     )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

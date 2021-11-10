@@ -31,12 +31,12 @@ class _PlayScreenState extends State<PlayScreen> {
     duration = widget.songModel.duration;
     return SafeArea(
         child: Scaffold(
+            //  backgroundColor:  Color(0xFF99f2c8),
             // backgroundColor: Colors.yellow,
             body: Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            // Color(0xFF1f4037),
             Color(0xFF99f2c8),
             Color(0xFFd9a7c7),
             Color(0xFFfffcdc),
@@ -86,39 +86,37 @@ class _PlayScreenState extends State<PlayScreen> {
                       )),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(100)),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
-                        );
-                        print("back pressed");
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                ),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(100)),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.blueGrey,
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0,
+                          ),
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 6.0,
+                            spreadRadius: 1.0,
+                          )
+                        ]),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          print("back pressed");
+                        },
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Colors.black,
+                          size: 30,
+                        ))),
               ],
             ),
             SizedBox(height: 60),
-
             Container(
               height: 180,
               width: 260,
@@ -174,24 +172,6 @@ class _PlayScreenState extends State<PlayScreen> {
                         )),
               ),
             ),
-            // child : Container(
-            //   width: 200,
-            //   height: 200,
-            //   child: QueryArtworkWidget(
-            //     artworkBorder: BorderRadius.circular(10),
-            //     id: widget.songModel.id,
-            //     type: ArtworkType.AUDIO,
-            //     nullArtworkWidget: CircleAvatar(
-            //       radius: 25,
-            //       child: Image.asset(
-            //         "assets/images/2.jpg",
-            //         fit: BoxFit.cover,
-            //         width: 200,
-            //         height: 200,
-            //       ),
-            //     ),
-            //   ),
-            // ),
             SizedBox(height: 30),
             Container(
               width: 200,
@@ -268,7 +248,12 @@ class _PlayScreenState extends State<PlayScreen> {
                       ]),
                   child: IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.play_arrow_sharp)),
+                      icon: const Icon(
+                        Icons.play_arrow_sharp,
+                        size: 40,
+                        color: Colors.lightBlue,
+                        // color: Color(0xFF88ECED),
+                      )),
                 ),
                 Container(
                   decoration: BoxDecoration(

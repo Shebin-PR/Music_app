@@ -22,26 +22,9 @@ class _FavouritesState extends State<Favourites> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Container(
-                      height: 50,
-                      width: 125,
+                      // height: 50,
+                      // width: 125,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.blueGrey,
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 15.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-4.0, -4.0),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ]),
                       child: const Text(
                         "Favourites",
                         style: TextStyle(
@@ -52,19 +35,19 @@ class _FavouritesState extends State<Favourites> {
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.green,
                             decorationThickness: 3,
-                            fontSize: 20,
+                            fontSize: 25,
+                            letterSpacing: .7,
                             fontWeight: FontWeight.bold,
                             color: Colors.transparent),
                       ),
                     ),
                   ),
                   Container(
-                    height: 50,
-                    width: 40,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(100)),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.blueGrey,
@@ -82,9 +65,12 @@ class _FavouritesState extends State<Favourites> {
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          print("back pressed");
                         },
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Colors.black,
+                          size: 30,
+                        )),
                   ),
                 ],
               ),

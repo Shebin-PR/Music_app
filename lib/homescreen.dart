@@ -326,16 +326,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                             gradient: const LinearGradient(
                               colors: [
-                                // Color(0xFF667db6),
-                                // Color(0xFF0082c8),
-
-                                Color(0xFF1c92d2),
-                                Color(0xFFf2fcfe),
+                                Color(0xFF99f2c8),
+                                Color(0xFFd9a7c7),
+                                Color(0xFFfffcdc),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            color: Colors.grey[200],
+                            // color: Colors.grey[200],
                             // color: Color(0XFFEFF3F6),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
