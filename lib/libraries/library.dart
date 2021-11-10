@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/homescreen.dart';
 import 'package:my_app/libraries/favourites.dart';
 
 class Library extends StatefulWidget {
@@ -15,15 +14,35 @@ class _LibraryState extends State<Library> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.only(left: 15, top: 20, right: 15),
+          padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: Text(
+                  Container(
+                    height: 50,
+                    width: 90,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.blueGrey,
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0,
+                          ),
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 6.0,
+                            spreadRadius: 1.0,
+                          )
+                        ]),
+                    child: const Text(
                       "Library",
                       style: TextStyle(
                           shadows: [
@@ -37,15 +56,35 @@ class _LibraryState extends State<Library> {
                           color: Colors.transparent),
                     ),
                   ),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                        );
-                        print("back pressed");
-                      },
-                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                  Container(
+                    height: 50,
+                    width: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.blueGrey,
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0,
+                          ),
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 6.0,
+                            spreadRadius: 1.0,
+                          )
+                        ]),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          print("back pressed");
+                        },
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                  ),
                 ],
               ),
               Column(
@@ -55,7 +94,7 @@ class _LibraryState extends State<Library> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Favourites()));
+                                builder: (context) => const Favourites()));
                         print("Textbutton pressed");
                       },
                       child: Row(
@@ -95,7 +134,7 @@ class _LibraryState extends State<Library> {
                         onPressed: () {
                           print("deleted playlist1");
                         },
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                       )
                     ],
                   ),
@@ -124,7 +163,7 @@ class _LibraryState extends State<Library> {
                         onPressed: () {
                           print("deleted playlist1");
                         },
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                       )
                     ],
                   ),
@@ -139,7 +178,7 @@ class _LibraryState extends State<Library> {
             print("lib float");
           },
           backgroundColor: Colors.black,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
     );
@@ -150,7 +189,7 @@ class _LibraryState extends State<Library> {
   Future openDialog() => showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-            title: Text(
+            title: const Text(
               "New Playlist",
               style: TextStyle(
                   letterSpacing: 1,
@@ -160,10 +199,10 @@ class _LibraryState extends State<Library> {
             ),
             content: TextField(
               cursorColor: Colors.white,
-              style:
-                  TextStyle(color: Colors.grey, fontSize: 20, letterSpacing: 1),
+              style: const TextStyle(
+                  color: Colors.grey, fontSize: 20, letterSpacing: 1),
               decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   fillColor: Colors.black,
                   filled: true,
@@ -175,7 +214,7 @@ class _LibraryState extends State<Library> {
             ),
             actions: [
               TextButton(
-                child: Text(
+                child: const Text(
                   "CREATE",
                   style: TextStyle(
                       letterSpacing: 1,

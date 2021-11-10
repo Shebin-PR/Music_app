@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'homescreen.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-main() {
-  runApp(MyApp());
+main() async {
+  await Hive.initFlutter();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,9 +18,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
-
-
