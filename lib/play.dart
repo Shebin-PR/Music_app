@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
-import 'homescreen.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'libraries/library.dart';
 
@@ -31,20 +30,7 @@ class _PlayScreenState extends State<PlayScreen> {
     duration = widget.songModel.duration;
     return SafeArea(
         child: Scaffold(
-            //  backgroundColor:  Color(0xFF99f2c8),
-            // backgroundColor: Colors.yellow,
             body: Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFF99f2c8),
-            Color(0xFFd9a7c7),
-            Color(0xFFfffcdc),
-          ],
-          end: Alignment.topLeft,
-          begin: Alignment.bottomRight,
-        ),
-      ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -54,18 +40,18 @@ class _PlayScreenState extends State<PlayScreen> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.pink[50],
                       borderRadius:
                           const BorderRadius.all(Radius.circular(100)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.blueGrey,
                           offset: Offset(4.0, 4.0),
-                          blurRadius: 16.0,
+                          blurRadius: 1.0,
                           spreadRadius: 1.0,
                         ),
                         BoxShadow(
-                          color: Colors.white,
+                          color: Colors.white10,
                           offset: Offset(-4.0, -4.0),
                           blurRadius: 15.0,
                           spreadRadius: 1.0,
@@ -82,25 +68,25 @@ class _PlayScreenState extends State<PlayScreen> {
                       },
                       icon: const Icon(
                         Icons.library_music_rounded,
-                        color: Colors.brown,
+                        color: Colors.black,
                       )),
                 ),
                 Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: Colors.pink[50],
                         borderRadius:
                             const BorderRadius.all(Radius.circular(100)),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.blueGrey,
                             offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
+                            blurRadius: .0,
                             spreadRadius: 1.0,
                           ),
                           BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 6.0,
+                            color: Colors.white10,
+                            offset: Offset(-1.0, -1.0),
+                            blurRadius: 15.0,
                             spreadRadius: 1.0,
                           )
                         ]),
@@ -164,8 +150,8 @@ class _PlayScreenState extends State<PlayScreen> {
                               child: Image.asset(
                                 "assets/images/2.jpg",
                                 fit: BoxFit.cover,
-                                width: 200,
-                                height: 200,
+                                width: 235,
+                                height: 235,
                               ),
                             ),
                           ),
@@ -181,9 +167,9 @@ class _PlayScreenState extends State<PlayScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                    color: Colors.brown[800],
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
               ),
             ),
             SizedBox(height: 50),
@@ -192,6 +178,10 @@ class _PlayScreenState extends State<PlayScreen> {
               child: ProgressBar(
                 progress: Duration(milliseconds: 101000),
                 total: Duration(milliseconds: duration),
+                thumbColor: Colors.brown,
+                baseBarColor: Colors.pink[100],
+                thumbGlowColor: Colors.pink[50],
+                progressBarColor: Colors.pink[300],
               ),
             ),
             SizedBox(height: 50),
@@ -201,20 +191,20 @@ class _PlayScreenState extends State<PlayScreen> {
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.pink[50],
                       borderRadius:
                           const BorderRadius.all(Radius.circular(100)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.blueGrey,
                           offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
+                          blurRadius: .0,
                           spreadRadius: 1.0,
                         ),
                         BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
+                          color: Colors.white10,
+                          offset: Offset(-1.0, -1.0),
+                          blurRadius: 15.0,
                           spreadRadius: 1.0,
                         )
                       ]),
@@ -222,27 +212,27 @@ class _PlayScreenState extends State<PlayScreen> {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.arrow_back_ios_new_sharp,
-                        color: Colors.green,
+                        color: Colors.brown,
                       )),
                 ),
                 Container(
                   height: 80,
                   width: 80,
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.pink[50],
                       borderRadius:
                           const BorderRadius.all(Radius.circular(100)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.blueGrey,
                           offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
+                          blurRadius: .0,
                           spreadRadius: 1.0,
                         ),
                         BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
+                          color: Colors.white10,
+                          offset: Offset(-1.0, -1.0),
+                          blurRadius: 15.0,
                           spreadRadius: 1.0,
                         )
                       ]),
@@ -251,26 +241,26 @@ class _PlayScreenState extends State<PlayScreen> {
                       icon: const Icon(
                         Icons.play_arrow_sharp,
                         size: 40,
-                        color: Colors.lightBlue,
+                        color: Colors.brown,
                         // color: Color(0xFF88ECED),
                       )),
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.pink[50],
                       borderRadius:
                           const BorderRadius.all(Radius.circular(100)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.blueGrey,
                           offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
+                          blurRadius: .0,
                           spreadRadius: 1.0,
                         ),
                         BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
+                          color: Colors.white10,
+                          offset: Offset(-1.0, -1.0),
+                          blurRadius: 15.0,
                           spreadRadius: 1.0,
                         )
                       ]),
@@ -278,7 +268,7 @@ class _PlayScreenState extends State<PlayScreen> {
                     onPressed: () {},
                     icon: const Icon(
                       Icons.arrow_forward_ios_sharp,
-                      color: Colors.green,
+                      color: Colors.brown,
                     ),
                   ),
                 ),
@@ -289,19 +279,19 @@ class _PlayScreenState extends State<PlayScreen> {
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: Colors.pink[50],
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   boxShadow: const [
                     BoxShadow(
                       color: Colors.blueGrey,
                       offset: Offset(4.0, 4.0),
-                      blurRadius: 15.0,
+                      blurRadius: .0,
                       spreadRadius: 1.0,
                     ),
                     BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-4.0, -4.0),
-                      blurRadius: 5.0,
+                      color: Colors.white10,
+                      offset: Offset(-1.0, -1.0),
+                      blurRadius: 15.0,
                       spreadRadius: 1.0,
                     )
                   ]),

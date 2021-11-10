@@ -21,10 +21,10 @@ class _LibraryState extends State<Library> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: 50,
-                    width: 90,
+                    // height: 50,
+                    // width: 100,
                     alignment: Alignment.center,
-                    child: const Text(
+                    child: Text(
                       "Library",
                       style: TextStyle(
                           shadows: [
@@ -85,7 +85,7 @@ class _LibraryState extends State<Library> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.white,
+                                color: Colors.green,
                                 offset: Offset(4.0, 4.0),
                                 blurRadius: .0,
                                 spreadRadius: 1.0,
@@ -116,26 +116,7 @@ class _LibraryState extends State<Library> {
                   ),
 
                   SizedBox(height: 30),
-                  // TextButton(
-                  //     onPressed: () {
-                  //       Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //               builder: (context) => const Favourites()));
-                  //       print("Textbutton pressed");
-                  //     },
-                  //     child: Row(
-                  //       children: const [
-                  //         Text(
-                  //           "Favourites",
-                  //           style: TextStyle(
-                  //               color: Colors.black,
-                  //               fontSize: 18,
-                  //               fontWeight: FontWeight.bold,
-                  //               letterSpacing: .5),
-                  //         ),
-                  //       ],
-                  //     )),
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

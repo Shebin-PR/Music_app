@@ -77,13 +77,6 @@ class _FavouritesState extends State<Favourites> {
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   backgroundColor: Colors.black,
-        //   onPressed: () {
-        //     print("fav flo pressed");
-        //   },
-        //   child: Icon(Icons.add),
-        // ),
       ),
     );
   }

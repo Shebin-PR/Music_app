@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        // backgroundColor: Color(0xFFff6e7f),
+        
         body: Container(
           child: ListView(
             children: [
@@ -333,8 +333,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            // color: Colors.grey[200],
-                            // color: Color(0XFFEFF3F6),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
                             boxShadow: const [
@@ -352,8 +350,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               )
                             ]),
                         child: ListTile(
-                          title: Text(songs[index].title),
-                          // subtitle: Text(songs[index].artist ?? "No Artist"),
+                          title: Text(
+                            songs[index].title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: Text(songs[index].artist ?? "No Artist"),
                           trailing: IconButton(
                             onPressed: () {
                               print("more pressed");
