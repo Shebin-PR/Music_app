@@ -70,134 +70,7 @@ class Settings extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 50),
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "About",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Terms Of Service",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Privacy Policy",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Version 1.0.1",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
+                ///////////////////////////////////////////////////////////////
                 Container(
                   height: 50,
                   width: 150,
@@ -236,6 +109,150 @@ class Settings extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 15),
+                //////////////////////////////////////////////////////////////
+                Container(
+                  height: 50,
+                  width: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 15.0,
+                          spreadRadius: 1.0,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4.0, -4.0),
+                          blurRadius: 6.0,
+                          spreadRadius: 1.0,
+                        )
+                      ]),
+                  child: TextButton(
+                      onPressed: () {
+                        showAboutDialog(context: context);
+                      },
+                      child: Text(
+                        "Terms Of Service",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      )),
+                ),
+                const SizedBox(height: 15),
+                ///////////////////////////////////////////////////////////////
+                Container(
+                  height: 50,
+                  width: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 15.0,
+                          spreadRadius: 1.0,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4.0, -4.0),
+                          blurRadius: 6.0,
+                          spreadRadius: 1.0,
+                        )
+                      ]),
+                  child: TextButton(
+                      onPressed: () {
+                        showAboutDialog(context: context);
+                      },
+                      child: Text(
+                        "Privacy Policy",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      )),
+                ),
+                const SizedBox(height: 15),
+
+                ///////////////////////////////////////////////////////////////
+                Container(
+                  height: 50,
+                  width: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 15.0,
+                          spreadRadius: 1.0,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4.0, -4.0),
+                          blurRadius: 6.0,
+                          spreadRadius: 1.0,
+                        )
+                      ]),
+                  child: TextButton(
+                      onPressed: () {
+                        showAboutDialog(
+                            context: context,
+                            applicationName: "Ganamela",
+                            children: [Text("data",style: TextStyle(color: Colors.black),)]);
+                      },
+                      child: Text(
+                        "About",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      )),
+                ),
+                const SizedBox(height: 15),
+                //////////////////////////////////////////////////////////////
+                Container(
+                  height: 50,
+                  width: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 15.0,
+                          spreadRadius: 1.0,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4.0, -4.0),
+                          blurRadius: 6.0,
+                          spreadRadius: 1.0,
+                        )
+                      ]),
+                  child: TextButton(
+                      onPressed: () {
+                        showAboutDialog(context: context);
+                      },
+                      child: Text(
+                        "Version 1.0.1",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      )),
                 ),
               ],
             ),

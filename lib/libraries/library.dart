@@ -114,9 +114,7 @@ class _LibraryState extends State<Library> {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 30),
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -133,7 +131,7 @@ class _LibraryState extends State<Library> {
                           child: Text(
                             "Playlist 1",
                             style: TextStyle(
-                                color: Colors.grey[700],
+                                color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                                 letterSpacing: .5),
@@ -162,7 +160,7 @@ class _LibraryState extends State<Library> {
                           child: Text(
                             "Playlist 2",
                             style: TextStyle(
-                                color: Colors.grey[700],
+                                color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                                 letterSpacing: .5),
