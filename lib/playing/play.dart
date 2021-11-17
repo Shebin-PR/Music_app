@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'libraries/library.dart';
+import '../libraries/library.dart';
 
 class PlayScreen extends StatefulWidget {
   SongModel songModel;

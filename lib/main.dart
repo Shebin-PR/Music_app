@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'database/datamodel.dart';
 import 'homescreen.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(AllSongsAdapter());
+  await Hive.openBox<List<AllSongs>>("songdata");
+
   runApp(const MyApp());
 }
 

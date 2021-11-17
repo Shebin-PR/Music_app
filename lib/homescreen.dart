@@ -3,10 +3,13 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/Settings/settings.dart';
+import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
-import 'package:my_app/play.dart';
+import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+
+import 'database/local.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final _textController = TextEditingController();
   final OnAudioQuery _audioQuery = OnAudioQuery();
   final assetsAudioPlayer = AssetsAudioPlayer();
 
@@ -23,34 +25,44 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     requestPermission();
-    getsong();
+    // getsong();
   }
+
+  final box = Boxes.getSongsDb();
 
   requestPermission() async {
-    if (!kIsWeb) {
-      bool permissionStatus = await _audioQuery.permissionsStatus();
-      if (!permissionStatus) {
-        await _audioQuery.permissionsRequest();
-      }
-      setState(() {});
+    // if (!kIsWeb) {
+    bool permissionStatus = await _audioQuery.permissionsStatus();
+    if (!permissionStatus) {
+      await _audioQuery.permissionsRequest();
     }
-  }
+    songs = await _audioQuery.querySongs();
+    Datasongs = songs
+        .map((e) => AllSongs(
+            path: e.uri!,
+            id: e.id,
+            title: e.title,
+            duration: e.duration,
+            artist: e.artist))
+        .toList();
 
-  int currentindex = 0;
+    await box.put("music", Datasongs);
+    dbSongs = box.get('music');
+    setState(() {});
+    // }
+  }
 
   List<SongModel> songs = [];
+  List<AllSongs> Datasongs = [];
+  List<AllSongs>? dbSongs = [];
 
-  getsong() async {
-    songs = await _audioQuery.querySongs(
-      sortType: null,
-      orderType: OrderType.ASC_OR_SMALLER,
-      uriType: UriType.EXTERNAL,
-      ignoreCase: true,
-    );
-  }
-
-  // Future<void> _handleRefresh() async {
-  //   return await Future.delayed(Duration(seconds: 1));
+  // getsong() async {
+  //   songs = await _audioQuery.querySongs(
+  //     sortType: null,
+  //     orderType: OrderType.ASC_OR_SMALLER,
+  //     uriType: UriType.EXTERNAL,
+  //     ignoreCase: true,
+  //   );
   // }
 
   @override
@@ -62,9 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Stack(children: [
             Column(
               children: [
-                // const SizedBox(height: 5),
-
-                /////////////////////////////// search ///////////////////////////////////////////////////////
+                /////////////////////////////// search /////////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -110,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 10),
 
-                ////////////////////////// L // F // R // S ////////////////////////////////////////////////////////
+                ////////////////////////// L // F // R // S /////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -290,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 8),
 
-                /////////////////////////// all songs ////////////////////////////////////////////////////////
+                /////////////////////////// all songs ///////////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -319,14 +329,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
 
-                /////////////////////// songs tiles /////////////////////////////////////////////////
+                /////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.only(bottom: 70),
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: songs.length,
+                    itemCount: dbSongs!.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
@@ -339,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           assetsAudioPlayer.open(
                               Audio.file(
-                                songs[index].uri.toString(),
+                                dbSongs![index].path,
                               ),
                               showNotification: true);
                         },
@@ -423,7 +433,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-/////////////////////////// bottom play//////////////////////////////
+
+            ///////////////////////// bottom play/////////////////////////////////////////////////////////////////
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
