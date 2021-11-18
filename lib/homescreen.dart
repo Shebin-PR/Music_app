@@ -8,7 +8,6 @@ import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
 import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import 'database/local.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!permissionStatus) {
       await _audioQuery.permissionsRequest();
     }
+    
     songs = await _audioQuery.querySongs();
     Datasongs = songs
         .map((e) => AllSongs(
@@ -47,14 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
 
     await box.put("music", Datasongs);
-    dbSongs = box.get('music');
+    db = box.get('music');
     setState(() {});
     // }
   }
 
   List<SongModel> songs = [];
   List<AllSongs> Datasongs = [];
-  List<AllSongs>? dbSongs = [];
+  List<AllSongs>? db = [];
 
   // getsong() async {
   //   songs = await _audioQuery.querySongs(
@@ -305,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
                       child: TextButton(
                           onPressed: () {
                             print("Pressed 1");
@@ -328,15 +328,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
+                SizedBox(height: 1),
                 /////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
-                    padding: EdgeInsets.only(bottom: 70),
+                    padding: EdgeInsets.only(bottom: 85),
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: dbSongs!.length,
+                    itemCount: db!.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
@@ -349,12 +349,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           assetsAudioPlayer.open(
                               Audio.file(
-                                dbSongs![index].path,
+                                db![index].path,
                               ),
                               showNotification: true);
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              left: 8, right: 8, bottom: 13),
                           child: Container(
                             decoration: BoxDecoration(
                                 gradient: const LinearGradient(
@@ -385,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ]),
                             child: ListTile(
                               title: Text(
-                                songs[index].title,
+                                songs[index].title,  
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -439,24 +440,29 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: 70,
-                color: Colors.white,
+                height: 85,
+                color: Colors.teal[200],
                 child: ListTile(
                   title: Text(
-                    "A.b.c.d",
+                    "Pakaliravukalil (Kurupp) . . .",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
-                    "No Artist",
+                    "Neha",
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   trailing: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.play_arrow),
+                    icon: Icon(
+                      Icons.play_arrow,
+                      color: Colors.black54,
+                    ),
                   ),
                   leading: CircleAvatar(
                     radius: 25,
