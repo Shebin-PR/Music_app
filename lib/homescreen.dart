@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!permissionStatus) {
       await _audioQuery.permissionsRequest();
     }
-    
+
     songs = await _audioQuery.querySongs();
     Datasongs = songs
         .map((e) => AllSongs(
@@ -48,6 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     await box.put("music", Datasongs);
     db = box.get('music');
+    db!.forEach((element) {
+      allaudios.add(Audio.file(element.path,
+          metas: Metas(
+              title: element.title,
+              id: element.id.toString(),
+              artist: element.artist)));
+    });
     setState(() {});
     // }
   }
@@ -55,15 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SongModel> songs = [];
   List<AllSongs> Datasongs = [];
   List<AllSongs>? db = [];
-
-  // getsong() async {
-  //   songs = await _audioQuery.querySongs(
-  //     sortType: null,
-  //     orderType: OrderType.ASC_OR_SMALLER,
-  //     uriType: UriType.EXTERNAL,
-  //     ignoreCase: true,
-  //   );
-  // }
+  List<Audio> allaudios = [];
 
   @override
   Widget build(BuildContext context) {
@@ -348,9 +347,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )),
                           );
                           assetsAudioPlayer.open(
-                              Audio.file(
-                                db![index].path,
-                              ),
+                              Playlist(audios: [
+                                Audio.file(allaudios[index].path)
+                              ]),
+                              loopMode: LoopMode.playlist,
+                              // Audio.file(
+                              //   db![index].path,
+                              // ),
                               showNotification: true);
                         },
                         child: Padding(
@@ -386,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ]),
                             child: ListTile(
                               title: Text(
-                                songs[index].title,  
+                                songs[index].title,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
