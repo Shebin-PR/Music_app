@@ -6,6 +6,7 @@ import 'package:my_app/Settings/settings.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
+import 'package:my_app/playing/notification.dart';
 import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'database/local.dart';
@@ -17,26 +18,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
-  final assetsAudioPlayer = AssetsAudioPlayer();
+  final OnAudioQuery audioQuery = OnAudioQuery();
+  final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
 
   @override
   void initState() {
     super.initState();
     requestPermission();
-    // getsong();
   }
-
-  final box = Boxes.getSongsDb();
 
   requestPermission() async {
     // if (!kIsWeb) {
-    bool permissionStatus = await _audioQuery.permissionsStatus();
+    bool permissionStatus = await audioQuery.permissionsStatus();
     if (!permissionStatus) {
-      await _audioQuery.permissionsRequest();
+      await audioQuery.permissionsRequest();
     }
 
-    songs = await _audioQuery.querySongs();
+    songs = await audioQuery.querySongs();
     Datasongs = songs
         .map((e) => AllSongs(
             path: e.uri!,
@@ -62,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SongModel> songs = [];
   List<AllSongs> Datasongs = [];
   List<AllSongs>? db = [];
+  final box = Boxes.getSongsDb();
   List<Audio> allaudios = [];
 
   @override
@@ -213,44 +212,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
                     ///////////////////// recent //////////////////////////
-                    Container(
-                        width: 85,
-                        height: 80,
-                        decoration: BoxDecoration(
-                            // color: Colors.grey[200],
-                            color: Color(0XFFEFF3F6),
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.blueAccent,
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 15.0,
-                                spreadRadius: 1.0,
-                              ),
-                              BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(-4.0, -4.0),
-                                blurRadius: 6.0,
-                                spreadRadius: 1.0,
-                              )
-                            ]),
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                print("recent pressed");
-                              },
-                              icon:
-                                  const Icon(Icons.access_time_filled_outlined),
-                            ),
-                            Text(
-                              "Recent",
-                              style: TextStyle(
-                                  color: Colors.grey[800],
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )),
+                    // Container(
+                    //     width: 85,
+                    //     height: 80,
+                    //     decoration: BoxDecoration(
+                    //         // color: Colors.grey[200],
+                    //         color: Color(0XFFEFF3F6),
+                    //         borderRadius: BorderRadius.circular(15),
+                    //         boxShadow: const [
+                    //           BoxShadow(
+                    //             color: Colors.blueAccent,
+                    //             offset: Offset(4.0, 4.0),
+                    //             blurRadius: 15.0,
+                    //             spreadRadius: 1.0,
+                    //           ),
+                    //           BoxShadow(
+                    //             color: Colors.white,
+                    //             offset: Offset(-4.0, -4.0),
+                    //             blurRadius: 6.0,
+                    //             spreadRadius: 1.0,
+                    //           )
+                    //         ]),
+                    //     child: Column(
+                    //       children: [
+                    //         IconButton(
+                    //           onPressed: () {
+                    //             print("recent pressed");
+                    //           },
+                    //           icon:
+                    //               const Icon(Icons.access_time_filled_outlined),
+                    //         ),
+                    //         Text(
+                    //           "Recent",
+                    //           style: TextStyle(
+                    //               color: Colors.grey[800],
+                    //               fontWeight: FontWeight.bold),
+                    //         )
+                    //       ],
+                    //     )),
 
                     ////////////////// settings ///////////////////////////////
                     Container(
@@ -281,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Settings()));
+                                      builder: (context) =>  Settings()));
                               print("settings pressed");
                             },
                             icon: const Icon(Icons.settings),
@@ -339,22 +338,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
+                          OpenAssetAudio(allaudios: allaudios, index: index)
+                              .open();
+                            
+                          // assetsAudioPlayer.open(
+                          //     Playlist(
+                          //         audios: [Audio.file(allaudios[index].path)]),
+                          //     loopMode: LoopMode.playlist,
+                          //     // Audio.file(
+                          //     //   db![index].path,
+                          //     // ),
+                          //     showNotification: true);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PlayScreen(
-                                      songModel: songs[index],
+                                      songs: allaudios,
+                                      index: index,
+                                      // songModel: songs[index],
                                     )),
                           );
-                          assetsAudioPlayer.open(
-                              Playlist(audios: [
-                                Audio.file(allaudios[index].path)
-                              ]),
-                              loopMode: LoopMode.playlist,
-                              // Audio.file(
-                              //   db![index].path,
-                              // ),
-                              showNotification: true);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(

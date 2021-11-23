@@ -1,8 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+class Settings extends StatefulWidget {
+  Settings({Key? key}) : super(key: key);
+
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  bool isSwitched = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getSwitchValues();
+  }
+
+  getSwitchValues() async {
+    isSwitched = await getSwitchState();
+    setState(() {});
+  }
+
+  Future<bool> saveSwitchState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("switchState", value);
+    print('Switch Value saved $value');
+    return prefs.setBool("switchState", value);
+  }
+
+  Future<bool> getSwitchState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isSwitched = await prefs.getBool("switchState");
+    print(isSwitched);
+
+    return isSwitched != null ? isSwitched : true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +135,37 @@ class Settings extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.normal)),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.toggle_on_outlined,
-                          size: 32,
-                          color: Colors.green[700],
-                        ),
+                      Switch(
+                        value: isSwitched,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isSwitched = value;
+                            saveSwitchState(value);
+                            print('Saved state is $isSwitched');
+
+                            // if (isSwitched == null || isSwitched == true) {
+                            //   ScaffoldMessenger.of(context)
+                            //       .showSnackBar(SnackBar(
+                            //     content: Text(
+                            //       'Notification turned on!',
+                            //       style: TextStyle(color: Colors.white),
+                            //     ),
+                            //     backgroundColor: Colors.grey[900],
+                            //   ));
+                            // } else {
+                            //   ScaffoldMessenger.of(context)
+                            //       .showSnackBar(SnackBar(
+                            //     content: Text(
+                            //       'Notification turned off!',
+                            //       style: TextStyle(color: Colors.white),
+                            //     ),
+                            //     backgroundColor: Colors.grey[900],
+                            //   ));
+                            // }
+                          });
+                        },
+                        inactiveTrackColor: Colors.grey,
+                        activeTrackColor: Colors.red,
                       ),
                     ],
                   ),
