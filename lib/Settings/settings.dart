@@ -25,15 +25,13 @@ class _SettingsState extends State<Settings> {
 
   Future<bool> saveSwitchState(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("switchState", value);
-    print('Switch Value saved $value');
-    return prefs.setBool("switchState", value);
+    prefs.setBool("toggleSwitch", value);
+    return prefs.setBool("toggleSwitch", value);
   }
 
   Future<bool> getSwitchState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isSwitched = await prefs.getBool("switchState");
-    print(isSwitched);
+    bool? isSwitched = await prefs.getBool("toggleSwitch");
 
     return isSwitched != null ? isSwitched : true;
   }
@@ -141,27 +139,26 @@ class _SettingsState extends State<Settings> {
                           setState(() {
                             isSwitched = value;
                             saveSwitchState(value);
-                            print('Saved state is $isSwitched');
 
-                            // if (isSwitched == null || isSwitched == true) {
-                            //   ScaffoldMessenger.of(context)
-                            //       .showSnackBar(SnackBar(
-                            //     content: Text(
-                            //       'Notification turned on!',
-                            //       style: TextStyle(color: Colors.white),
-                            //     ),
-                            //     backgroundColor: Colors.grey[900],
-                            //   ));
-                            // } else {
-                            //   ScaffoldMessenger.of(context)
-                            //       .showSnackBar(SnackBar(
-                            //     content: Text(
-                            //       'Notification turned off!',
-                            //       style: TextStyle(color: Colors.white),
-                            //     ),
-                            //     backgroundColor: Colors.grey[900],
-                            //   ));
-                            // }
+                            if (isSwitched == null || isSwitched == true) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Restart app for changes..!',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.grey[900],
+                              ));
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Restart app for changes..!',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.grey[900],
+                              ));
+                            }
                           });
                         },
                         inactiveTrackColor: Colors.grey,

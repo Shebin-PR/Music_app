@@ -8,7 +8,7 @@ class OpenAssetAudio {
 
   Future<bool?> setSwitchedValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isSwitched = await prefs.getBool("switchState");
+    isSwitched = await prefs.getBool("toggleSwitch");
     return isSwitched;
   }
 

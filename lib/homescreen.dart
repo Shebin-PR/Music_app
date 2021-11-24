@@ -17,6 +17,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+Audio find(List<Audio> source, String fromPath) {
+  return source.firstWhere((element) => element.path == fromPath);
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   final OnAudioQuery audioQuery = OnAudioQuery();
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
@@ -280,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>  Settings()));
+                                      builder: (context) => Settings()));
                               print("settings pressed");
                             },
                             icon: const Icon(Icons.settings),
@@ -340,15 +344,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           OpenAssetAudio(allaudios: allaudios, index: index)
                               .open();
-                            
-                          // assetsAudioPlayer.open(
-                          //     Playlist(
-                          //         audios: [Audio.file(allaudios[index].path)]),
-                          //     loopMode: LoopMode.playlist,
-                          //     // Audio.file(
-                          //     //   db![index].path,
-                          //     // ),
-                          //     showNotification: true);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -442,48 +437,64 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             ///////////////////////// bottom play/////////////////////////////////////////////////////////////////
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                height: 85,
-                color: Colors.teal[200],
-                child: ListTile(
-                  title: Text(
-                    "Pakaliravukalil (Kurupp) . . .",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w500),
-                  ),
-                  subtitle: Text(
-                    "Neha",
-                    style: TextStyle(
-                        color: Colors.black54, fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.play_arrow,
-                      color: Colors.black54,
+            assetsAudioPlayer.builderCurrent(
+                builder: (context, Playing? playing) {
+              final myAudios = find(allaudios, playing!.audio.assetAudioPath);
+              return Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: 85,
+                  color: Colors.teal[500],
+                  child: ListTile(
+                    title: Text(
+                      myAudios.metas.title!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w500),
                     ),
-                  ),
-                  leading: CircleAvatar(
-                    radius: 25,
-                    child: ClipOval(
-                      child: Image.asset(
-                        "assets/images/2.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
+                    subtitle: Text(
+                      myAudios.metas.artist ?? "No Artist",
+                      style: TextStyle(
+                          color: Colors.black54, fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: PlayerBuilder.isPlaying(
+                      player: assetsAudioPlayer,
+                      builder: (context, isplaying) {
+                        return IconButton(
+                            onPressed: () async {
+                              await assetsAudioPlayer.playOrPause();
+                            },
+                            icon: Icon(
+                              isplaying
+                                  ? Icons.pause_rounded
+                                  : Icons.play_arrow_rounded,
+                              size: 32,
+                            ));
+                      },
+                    ),
+                    leading: QueryArtworkWidget(
+                      artworkBorder: BorderRadius.circular(100),
+                      id: int.parse(myAudios.metas.id!),
+                      type: ArtworkType.AUDIO,
+                      nullArtworkWidget: CircleAvatar(
+                        child: ClipOval(
+                          child: Image.asset(
+                            "assets/images/2.jpg",
+                            fit: BoxFit.cover,
+                            width: 50,
+                            height: 50,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            )
+              );
+            })
           ]),
         ),
       ),
