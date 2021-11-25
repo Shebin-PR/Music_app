@@ -349,8 +349,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             MaterialPageRoute(
                                 builder: (context) => PlayScreen(
                                       songs: allaudios,
-                                      index: index,
-                                      // songModel: songs[index],
                                     )),
                           );
                         },
@@ -362,7 +360,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 gradient: const LinearGradient(
                                   colors: [
                                     Colors.teal,
-                                    // Colors.white70,
                                     Colors.grey,
                                   ],
                                   begin: Alignment.topLeft,
@@ -442,51 +439,64 @@ class _HomeScreenState extends State<HomeScreen> {
               final myAudios = find(allaudios, playing!.audio.assetAudioPath);
               return Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: double.infinity,
-                  height: 85,
-                  color: Colors.teal[500],
-                  child: ListTile(
-                    title: Text(
-                      myAudios.metas.title!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      myAudios.metas.artist ?? "No Artist",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: PlayerBuilder.isPlaying(
-                      player: assetsAudioPlayer,
-                      builder: (context, isplaying) {
-                        return IconButton(
-                            onPressed: () async {
-                              await assetsAudioPlayer.playOrPause();
-                            },
-                            icon: Icon(
-                              isplaying
-                                  ? Icons.pause_rounded
-                                  : Icons.play_arrow_rounded,
-                              size: 32,
-                            ));
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    width: 377,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.pink[200],
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlayScreen(
+                                      songs: allaudios,
+                                    )));
                       },
-                    ),
-                    leading: QueryArtworkWidget(
-                      artworkBorder: BorderRadius.circular(100),
-                      id: int.parse(myAudios.metas.id!),
-                      type: ArtworkType.AUDIO,
-                      nullArtworkWidget: CircleAvatar(
-                        child: ClipOval(
-                          child: Image.asset(
-                            "assets/images/2.jpg",
-                            fit: BoxFit.cover,
-                            width: 50,
-                            height: 50,
+                      title: Text(
+                        myAudios.metas.title!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(
+                        myAudios.metas.artist ?? "No Artist",
+                        style: TextStyle(
+                            color: Colors.black54, fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: PlayerBuilder.isPlaying(
+                        player: assetsAudioPlayer,
+                        builder: (context, isplaying) {
+                          return IconButton(
+                              onPressed: () async {
+                                await assetsAudioPlayer.playOrPause();
+                              },
+                              icon: Icon(
+                                isplaying
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
+                                size: 30,
+                              ));
+                        },
+                      ),
+                      leading: QueryArtworkWidget(
+                        artworkBorder: BorderRadius.circular(100),
+                        id: int.parse(myAudios.metas.id!),
+                        type: ArtworkType.AUDIO,
+                        nullArtworkWidget: CircleAvatar(
+                          child: ClipOval(
+                            child: Image.asset(
+                              "assets/images/2.jpg",
+                              fit: BoxFit.cover,
+                              width: 200,
+                              height: 100,
+                            ),
                           ),
                         ),
                       ),

@@ -8,9 +8,10 @@ import '../libraries/library.dart';
 
 class PlayScreen extends StatefulWidget {
   List<Audio> songs;
-  int index;
-  PlayScreen({Key? key, required this.songs, required this.index})
-      : super(key: key);
+  PlayScreen({
+    Key? key,
+    required this.songs,
+  }) : super(key: key);
 
   @override
   _PlayScreenState createState() => _PlayScreenState();
@@ -19,7 +20,6 @@ class PlayScreen extends StatefulWidget {
 class _PlayScreenState extends State<PlayScreen> {
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
   Audio find(List<Audio> source, String fromPath) {
-    print("object");
     return source.firstWhere((element) => element.path == fromPath);
   }
 
