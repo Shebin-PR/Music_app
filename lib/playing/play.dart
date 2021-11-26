@@ -8,10 +8,7 @@ import '../libraries/library.dart';
 
 class PlayScreen extends StatefulWidget {
   List<Audio> songs;
-  PlayScreen({
-    Key? key,
-    required this.songs,
-  }) : super(key: key);
+  PlayScreen({Key? key,required this.songs,}) : super(key: key);
 
   @override
   _PlayScreenState createState() => _PlayScreenState();

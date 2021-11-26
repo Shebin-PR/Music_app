@@ -1,18 +1,18 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class OpenAssetAudio {
+class OpenAssetAudio { 
   List<Audio> allaudios;
   int index;
   bool? isSwitched;
+
+  OpenAssetAudio({required this.allaudios, required this.index});
 
   Future<bool?> setSwitchedValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isSwitched = await prefs.getBool("toggleSwitch");
     return isSwitched;
   }
-
-  OpenAssetAudio({required this.allaudios, required this.index});
 
   final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
   open() async {

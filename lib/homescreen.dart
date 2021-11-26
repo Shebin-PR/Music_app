@@ -331,6 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: 1),
+
                 /////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
@@ -445,7 +446,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 377,
                     height: 80,
                     decoration: BoxDecoration(
-                        color: Colors.pink[200],
+                        color: Colors.black26,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: ListTile(
                       onTap: () {
@@ -466,24 +467,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       subtitle: Text(
                         myAudios.metas.artist ?? "No Artist",
                         style: TextStyle(
-                            color: Colors.black54, fontWeight: FontWeight.bold),
+                            color: Colors.black, fontWeight: FontWeight.bold),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: PlayerBuilder.isPlaying(
-                        player: assetsAudioPlayer,
-                        builder: (context, isplaying) {
-                          return IconButton(
-                              onPressed: () async {
-                                await assetsAudioPlayer.playOrPause();
-                              },
-                              icon: Icon(
-                                isplaying
-                                    ? Icons.pause_rounded
-                                    : Icons.play_arrow_rounded,
-                                size: 30,
-                              ));
-                        },
                       ),
                       leading: QueryArtworkWidget(
                         artworkBorder: BorderRadius.circular(100),
@@ -499,6 +485,42 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
+                      ),
+                      trailing: Wrap(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                assetsAudioPlayer.previous();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_ios_new_sharp,
+                                color: Colors.black,
+                              )),
+                          PlayerBuilder.isPlaying(
+                            player: assetsAudioPlayer,
+                            builder: (context, isplaying) {
+                              return IconButton(
+                                  onPressed: () async {
+                                    await assetsAudioPlayer.playOrPause();
+                                  },
+                                  icon: Icon(
+                                    isplaying
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                    size: 30,
+                                    color: Colors.black,
+                                  ));
+                            },
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                assetsAudioPlayer.next();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_forward_ios_sharp,
+                                color: Colors.black,
+                              )),
+                        ],
                       ),
                     ),
                   ),
