@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/libraries/create.dart';
 import 'package:my_app/libraries/favourites.dart';
 
 class Library extends StatefulWidget {
@@ -21,8 +22,6 @@ class _LibraryState extends State<Library> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    // height: 50,
-                    // width: 100,
                     alignment: Alignment.center,
                     child: Text(
                       "Library",
@@ -180,7 +179,10 @@ class _LibraryState extends State<Library> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            openDialog();
+            showDialog(
+              context: context,
+              builder: (Context) => CreateNewPlaylist(),
+            );
             print("lib float");
           },
           backgroundColor: Colors.black,

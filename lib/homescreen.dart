@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/Settings/settings.dart';
 import 'package:my_app/database/datamodel.dart';
+import 'package:my_app/libraries/create.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
 import 'package:my_app/playing/notification.dart';
@@ -32,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   requestPermission() async {
-    // if (!kIsWeb) {
     bool permissionStatus = await audioQuery.permissionsStatus();
     if (!permissionStatus) {
       await audioQuery.permissionsRequest();
@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
               artist: element.artist)));
     });
     setState(() {});
-    // }
   }
 
   List<SongModel> songs = [];
@@ -404,7 +403,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     value: 1,
                                   ),
                                   PopupMenuItem(
-                                    child: Text("Add to playlists"),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (Context) =>
+                                                CreateNewPlaylist(),
+                                          );
+                                        },
+                                        child: Text("Add to playlists")),
                                     value: 2,
                                   ),
                                 ],
@@ -446,7 +453,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 377,
                     height: 80,
                     decoration: BoxDecoration(
-                        color: Colors.black26,
+                        color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: ListTile(
                       onTap: () {

@@ -9,7 +9,6 @@ main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AllSongsAdapter());
   await Hive.openBox<List<AllSongs>>("songdata");
-
   runApp(const MyApp());
 }
 
