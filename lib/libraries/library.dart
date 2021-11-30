@@ -7,7 +7,7 @@ import 'package:my_app/libraries/playlist.dart';
 class Library extends StatefulWidget {
   final List<dynamic> audios;
 
-   Library({Key? key,required this.audios}) : super(key: key);
+  Library({Key? key, required this.audios}) : super(key: key);
 
   @override
   _LibraryState createState() => _LibraryState();
@@ -97,15 +97,15 @@ class _LibraryState extends State<Library> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.green,
+                                color: Colors.redAccent,
                                 offset: Offset(4.0, 4.0),
-                                blurRadius: .0,
+                                blurRadius: 8.0,
                                 spreadRadius: 1.0,
                               ),
                               BoxShadow(
                                 color: Colors.white,
                                 offset: Offset(-4.0, -4.0),
-                                blurRadius: .0,
+                                blurRadius: 9.0,
                                 spreadRadius: 1.0,
                               )
                             ]),
@@ -322,7 +322,7 @@ class _LibraryState extends State<Library> {
                             duration: const Duration(seconds: 1),
                           ),
                         );
-                  ;
+    
                   setState(() {});
                   Navigator.pop(context, 'OK');
                   name.clear();

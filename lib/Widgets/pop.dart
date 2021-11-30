@@ -1,39 +1,29 @@
+// import 'package:flutter/material.dart';
+// import 'package:hive/hive.dart';
+// import 'package:my_app/database/datamodel.dart';
+// import 'package:my_app/database/local.dart';
+// import 'package:on_audio_query/on_audio_query.dart';
 
+// class PopingUp extends StatefulWidget {
+//   const PopingUp({Key? key}) : super(key: key);
 
-import 'package:flutter/material.dart';
+//   @override
+//   _PopingUpState createState() => _PopingUpState();
+// }
 
-class PopingUp extends StatefulWidget {
-  const PopingUp({Key? key}) : super(key: key);
+// class _PopingUpState extends State<PopingUp> {
+ 
 
-  @override
-  _PopingUpState createState() => _PopingUpState();
-}
+//   @override
+//   void initState() {
+//     super.initState();
+//     songfetching();
+//   }
 
-class _PopingUpState extends State<PopingUp> {
-  @override
-  Widget build(BuildContext context) {
-    return showBottomSheet();
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return showBottomSheet();
+//   }
 
-  showBottomSheet()  {
-    showModalBottomSheet(
-        context: context,
-        builder: (ctx1) {
-          return Container(
-            width: double.infinity,
-            height: 300,
-            color: Colors.black,
-            child: ListView(
-              children: [
-                Text("Hello world"),
-              ],
-            ),
-          );
-        });
-  }
-}
-
-
-// Future<void> showBottomSheet(BuildContext ctx) {
-//       
-//           });
+  
+// }

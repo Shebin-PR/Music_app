@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:my_app/Settings/settings.dart';
 import 'package:my_app/Widgets/pop.dart';
 import 'package:my_app/Widgets/popup.dart';
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SongModel> songs = [];
   List<AllSongs> Datasongs = [];
   List<AllSongs>? db = [];
-  final box = Boxes.getSongsDb();
+  Box<List<AllSongs>> box = Boxes.getSongsDb();
   List<Audio> allaudios = [];
 
   @override
@@ -155,7 +156,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>  Library(audios: [],)),
+                                      builder: (context) => Library(
+                                            audios: [],
+                                          )),
                                 );
                                 print("Library pressed");
                               },
@@ -402,8 +405,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               // trailing:
-                                  // PopingUp(),
-                                  // AlertPopUp(audioId: allaudios[index].metas.artist!) ,
+                              // PopingUp(),
+                              // AlertPopUp(audioId: allaudios[index].metas.artist!) ,
                               //     PopupMenuButton(
                               //   itemBuilder: (context) => [
                               //     PopupMenuItem(
