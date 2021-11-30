@@ -3,8 +3,9 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/Settings/settings.dart';
+import 'package:my_app/Widgets/pop.dart';
+import 'package:my_app/Widgets/popup.dart';
 import 'package:my_app/database/datamodel.dart';
-import 'package:my_app/libraries/create.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
 import 'package:my_app/playing/notification.dart';
@@ -154,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Library()),
+                                      builder: (context) =>  Library(audios: [],)),
                                 );
                                 print("Library pressed");
                               },
@@ -342,8 +343,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          OpenAssetAudio(allaudios: allaudios, index: index)
-                              .open();
+                          OpenAssetAudio()
+                              .openAsset(index: index, audios: allaudios);
+                          ////////////////
+                          // (allaudios: allaudios, index: index)
+                          //     .open();
+                          ////////////////
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -396,26 +401,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              trailing: PopupMenuButton(
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    child: Text("Add to favourites"),
-                                    value: 1,
-                                  ),
-                                  PopupMenuItem(
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (Context) =>
-                                                CreateNewPlaylist(),
-                                          );
-                                        },
-                                        child: Text("Add to playlists")),
-                                    value: 2,
-                                  ),
-                                ],
-                              ),
+                              // trailing:
+                                  // PopingUp(),
+                                  // AlertPopUp(audioId: allaudios[index].metas.artist!) ,
+                              //     PopupMenuButton(
+                              //   itemBuilder: (context) => [
+                              //     PopupMenuItem(
+                              //       child: Text("Add to favourites"),
+                              //       value: 1,
+                              //     ),
+                              //     PopupMenuItem(
+                              //       child: GestureDetector(
+                              //           onTap: () {
+                              //             // PopingUp;
+                              //             // showDialog(
+                              //             //   context: context,
+                              //             //   builder: (Context) =>
+                              //             //       CreateNewPlayl(),
+                              //             // );
+                              //           },
+                              //           child: Text("Add to playlists")),
+                              //       value: 2,
+                              //     ),
+                              //   ],
+                              // ),
                               leading: QueryArtworkWidget(
                                 id: songs[index].id,
                                 type: ArtworkType.AUDIO,

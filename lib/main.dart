@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'database/datamodel.dart';
+import 'database/playlistmodel.dart';
 import 'homescreen.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -9,6 +10,8 @@ main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AllSongsAdapter());
   await Hive.openBox<List<AllSongs>>("songdata");
+  await Hive.openBox("playlist");
+  Hive.registerAdapter(PlayListModelAdapter());
   runApp(const MyApp());
 }
 

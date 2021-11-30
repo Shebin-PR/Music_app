@@ -18,6 +18,9 @@ class AllSongs extends HiveObject {
   @HiveField(5)
   String? artist;
 
+  @HiveField(6)
+  dynamic playlist;
+
   AllSongs(
       {required this.path,
       required this.id,

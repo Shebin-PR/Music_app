@@ -67,7 +67,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Library()),
+                                        builder: (context) =>  Library(audios: [],)),
                                   );
                                   print("Library pressed");
                                 },
