@@ -7,8 +7,11 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import '../libraries/library.dart';
 
 class PlayScreen extends StatefulWidget {
-  List<Audio> songs;
-  PlayScreen({Key? key,required this.songs,}) : super(key: key);
+  final songs;
+  PlayScreen({
+    Key? key,
+    required this.songs,
+  }) : super(key: key);
 
   @override
   _PlayScreenState createState() => _PlayScreenState();
@@ -44,30 +47,15 @@ class _PlayScreenState extends State<PlayScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            decoration: BoxDecoration(
-                                color: Colors.pink[50],
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(100)),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.blueGrey,
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: 1.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white10,
-                                    offset: Offset(-4.0, -4.0),
-                                    blurRadius: 15.0,
-                                    spreadRadius: 1.0,
-                                  )
-                                ]),
+                            decoration: IconShadows(),
                             child: IconButton(
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>  Library(audios: [],)),
+                                        builder: (context) => Library(
+                                              audios: [],
+                                            )),
                                   );
                                   print("Library pressed");
                                 },
@@ -77,24 +65,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                 )),
                           ),
                           Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.pink[50],
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.blueGrey,
-                                      offset: Offset(4.0, 4.0),
-                                      blurRadius: .0,
-                                      spreadRadius: 1.0,
-                                    ),
-                                    BoxShadow(
-                                      color: Colors.white10,
-                                      offset: Offset(-1.0, -1.0),
-                                      blurRadius: 15.0,
-                                      spreadRadius: 1.0,
-                                    )
-                                  ]),
+                              decoration: IconShadows(),
                               child: IconButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -213,24 +184,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         children: [
                           Container(
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Colors.pink[50],
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(100)),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.blueGrey,
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: .0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white10,
-                                    offset: Offset(-1.0, -1.0),
-                                    blurRadius: 15.0,
-                                    spreadRadius: 1.0,
-                                  )
-                                ]),
+                            decoration: IconShadows(),
                             child: IconButton(
                                 onPressed: () {
                                   assetsAudioPlayer.previous();
@@ -246,24 +200,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                 return Container(
                                   height: 80,
                                   width: 80,
-                                  decoration: BoxDecoration(
-                                      color: Colors.pink[50],
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.blueGrey,
-                                          offset: Offset(4.0, 4.0),
-                                          blurRadius: .0,
-                                          spreadRadius: 1.0,
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.white10,
-                                          offset: Offset(-1.0, -1.0),
-                                          blurRadius: 15.0,
-                                          spreadRadius: 1.0,
-                                        )
-                                      ]),
+                                  decoration: IconShadows(),
                                   child: IconButton(
                                       onPressed: () async {
                                         await assetsAudioPlayer.playOrPause();
@@ -277,24 +214,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                 );
                               }),
                           Container(
-                            decoration: BoxDecoration(
-                                color: Colors.pink[50],
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(100)),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.blueGrey,
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: .0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white10,
-                                    offset: Offset(-1.0, -1.0),
-                                    blurRadius: 15.0,
-                                    spreadRadius: 1.0,
-                                  )
-                                ]),
+                            decoration: IconShadows(),
                             child: IconButton(
                               onPressed: () {
                                 assetsAudioPlayer.next();
@@ -312,24 +232,7 @@ class _PlayScreenState extends State<PlayScreen> {
                       Container(
                         height: 55,
                         width: 55,
-                        decoration: BoxDecoration(
-                            color: Colors.pink[50],
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(100)),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.blueGrey,
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: .0,
-                                spreadRadius: 1.0,
-                              ),
-                              BoxShadow(
-                                color: Colors.white10,
-                                offset: Offset(-1.0, -1.0),
-                                blurRadius: 15.0,
-                                spreadRadius: 1.0,
-                              )
-                            ]),
+                        decoration: IconShadows(),
                         child: IconButton(
                             onPressed: () {},
                             icon: const Icon(
@@ -342,5 +245,25 @@ class _PlayScreenState extends State<PlayScreen> {
                 ),
               );
             })));
+  }
+
+  BoxDecoration IconShadows() {
+    return BoxDecoration(
+        color: Colors.pink[50],
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 1.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white10,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 }

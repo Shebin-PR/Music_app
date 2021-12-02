@@ -21,7 +21,6 @@ class _LibraryState extends State<Library> {
 
   TextEditingController name = TextEditingController();
   String? title;
-  List a = [];
   Box playlist = Hive.box('playlist');
   @override
   Widget build(BuildContext context) {
@@ -127,64 +126,6 @@ class _LibraryState extends State<Library> {
                     ],
                   ),
                   SizedBox(height: 30),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     // IconButton(
-                  //     //   onPressed: () {
-                  //     //     print("Add playlist1");
-                  //     //   },
-                  //     //   icon: Icon(Icons.add_box),
-                  //     // ),
-                  //     TextButton(
-                  //         onPressed: () {
-                  //           print("Textbutton pressed");
-                  //         },
-                  //         child: Text(
-                  //           "Playlist 1",
-                  //           style: TextStyle(
-                  //               color: Colors.black,
-                  //               fontSize: 18,
-                  //               fontWeight: FontWeight.w400,
-                  //               letterSpacing: .5),
-                  //         )),
-                  //     IconButton(
-                  //       onPressed: () {
-                  //         print("deleted playlist1");
-                  //       },
-                  //       icon: const Icon(Icons.delete),
-                  //     )
-                  //   ],
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     // IconButton(
-                  //     //   onPressed: () {
-                  //     //     print("Add playlist1");
-                  //     //   },
-                  //     //   icon: Icon(Icons.add_box),
-                  //     // ),
-                  //     TextButton(
-                  //         onPressed: () {
-                  //           print("Textbutton pressed");
-                  //         },
-                  //         child: Text(
-                  //           "Playlist 2",
-                  //           style: TextStyle(
-                  //               color: Colors.black,
-                  //               fontSize: 18,
-                  //               fontWeight: FontWeight.w400,
-                  //               letterSpacing: .5),
-                  //         )),
-                  //     IconButton(
-                  //       onPressed: () {
-                  //         print("deleted playlist1");
-                  //       },
-                  //       icon: const Icon(Icons.delete),
-                  //     )
-                  //   ],
-                  // ),
                 ],
               ),
               playlist.isEmpty
@@ -194,7 +135,6 @@ class _LibraryState extends State<Library> {
                   : ValueListenableBuilder(
                       valueListenable: Hive.box('playlist').listenable(),
                       builder: (context, Box playlistname, _) {
-                        //var keys = todos.keys.cast<int>().toList();
                         return (ListView.separated(
                           physics: ScrollPhysics(),
                           scrollDirection: Axis.vertical,
@@ -322,10 +262,10 @@ class _LibraryState extends State<Library> {
                             duration: const Duration(seconds: 1),
                           ),
                         );
-    
+
                   setState(() {});
                   Navigator.pop(context, 'OK');
-                  name.clear();
+                  // name.clear();
                 }
               },
             )
@@ -397,7 +337,7 @@ class _LibraryState extends State<Library> {
                   }
                   setState(() {});
                   Navigator.pop(context, 'OK');
-                  name.clear();
+                  // name.clear();
                 },
                 child: const Text(
                   "CREATE",
@@ -414,13 +354,3 @@ class _LibraryState extends State<Library> {
   }
 }
 
-
-
-
-  // onPressed: () {
-  //                 title = name.text;
-  //                 playlist.put(title, a);
-  //                 var b = playlist.get(title);
-  //                 print(b);
-  //                 name.clear();
-  //               },

@@ -1,11 +1,11 @@
-import 'dart:ui';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/Settings/settings.dart';
-import 'package:my_app/Widgets/pop.dart';
-import 'package:my_app/Widgets/popup.dart';
+import 'package:my_app/Widgets/bottommodel.dart';
+import 'package:my_app/Widgets/popupmenu.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
@@ -16,6 +16,8 @@ import 'database/local.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  get title => null;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -67,6 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<AllSongs>? db = [];
   Box<List<AllSongs>> box = Boxes.getSongsDb();
   List<Audio> allaudios = [];
+  String? title;
+  List y = [];
+  TextEditingController name = TextEditingController();
+  Box playlist = Hive.box('playlist');
+  var x = [];
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Stack(children: [
             Column(
               children: [
-                /////////////////////////////// search /////////////////////////////////////////////////////////////
+/////////////////////////////////////////////// search /////////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -86,24 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         height: 40,
                         width: 370,
-                        decoration: BoxDecoration(
-                            // color: Colors.grey[200],
-                            color: Color(0XFFEFF3F6),
-                            borderRadius: BorderRadius.circular(100),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.blueAccent,
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 15.0,
-                                spreadRadius: 1.0,
-                              ),
-                              BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(-4.0, -4.0),
-                                blurRadius: 6.0,
-                                spreadRadius: 1.0,
-                              )
-                            ]),
+                        decoration: BlueShadow(),
                         child: const TextField(
                           decoration: InputDecoration(
                               prefixIcon: Icon(
@@ -123,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 10),
 
-                ////////////////////////// L // F // R // S /////////////////////////////////////////////////////////
+///////////////////////////////////////////// L // F // R // S /////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -131,24 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: 85,
                       height: 80,
-                      decoration: BoxDecoration(
-                          // color: Colors.grey[200],
-                          color: Color(0XFFEFF3F6),
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.blueAccent,
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 15.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-4.0, -4.0),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ]),
+                      decoration: BlueShadow(),
                       child: Column(
                         children: [
                           IconButton(
@@ -177,24 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: 85,
                       height: 80,
-                      decoration: BoxDecoration(
-                          // color: Colors.grey[200],
-                          color: Color(0XFFEFF3F6),
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.blueAccent,
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 15.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-4.0, -4.0),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ]),
+                      decoration: BlueShadow(),
                       child: Column(
                         children: [
                           IconButton(
@@ -203,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Favourites()));
+                                          Favourites()));
                               print("favourite pressed");
                             },
                             icon: const Icon(Icons.favorite),
@@ -262,24 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: 85,
                       height: 80,
-                      decoration: BoxDecoration(
-                          // color: Colors.grey[200],
-                          color: Color(0XFFEFF3F6),
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.blueAccent,
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 15.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-4.0, -4.0),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ]),
+                      decoration: BlueShadow(),
                       child: Column(
                         children: [
                           IconButton(
@@ -305,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 8),
 
-                /////////////////////////// all songs ///////////////////////////////////////////////////////////////
+//////////////////////////////////////////// all songs ///////////////////////////////////////////////////////////////
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -334,8 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: 1),
-
-                /////////////////////// songs tiles /////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.only(bottom: 85),
@@ -348,10 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           OpenAssetAudio()
                               .openAsset(index: index, audios: allaudios);
-                          ////////////////
-                          // (allaudios: allaudios, index: index)
-                          //     .open();
-                          ////////////////
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -364,32 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(
                               left: 8, right: 8, bottom: 13),
                           child: Container(
-                            decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Colors.teal,
-                                    Colors.grey,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                color: Colors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.blueAccent,
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4.0, -4.0),
-                                    blurRadius: 6.0,
-                                    spreadRadius: 1.0,
-                                  )
-                                ]),
+                            decoration: BlueShadow(),
                             child: ListTile(
                               title: Text(
                                 songs[index].title,
@@ -404,30 +314,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              // trailing:
-                              // PopingUp(),
-                              // AlertPopUp(audioId: allaudios[index].metas.artist!) ,
-                              //     PopupMenuButton(
-                              //   itemBuilder: (context) => [
-                              //     PopupMenuItem(
-                              //       child: Text("Add to favourites"),
-                              //       value: 1,
-                              //     ),
-                              //     PopupMenuItem(
-                              //       child: GestureDetector(
-                              //           onTap: () {
-                              //             // PopingUp;
-                              //             // showDialog(
-                              //             //   context: context,
-                              //             //   builder: (Context) =>
-                              //             //       CreateNewPlayl(),
-                              //             // );
-                              //           },
-                              //           child: Text("Add to playlists")),
-                              //       value: 2,
-                              //     ),
-                              //   ],
-                              // ),
+
+                              trailing: PopUpPlayFav(audio: songs[index]),
+
                               leading: QueryArtworkWidget(
                                 id: songs[index].id,
                                 type: ArtworkType.AUDIO,
@@ -453,20 +342,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-            ///////////////////////// bottom play/////////////////////////////////////////////////////////////////
+            ///////////////////////// Bottom Recent Song/////////////////////////////////////////////////////////////////
             assetsAudioPlayer.builderCurrent(
                 builder: (context, Playing? playing) {
               final myAudios = find(allaudios, playing!.audio.assetAudioPath);
               return Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
+                  padding: const EdgeInsets.only(bottom: 5, left: 2, right: 2),
                   child: Container(
                     width: 377,
                     height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    decoration: BlueShadow(),
                     child: ListTile(
                       onTap: () {
                         Navigator.push(
@@ -550,5 +437,27 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+//////////////////////Blue Box Decoration//////////////////////////////////////////////////////////
+  BoxDecoration BlueShadow() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueAccent,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 }

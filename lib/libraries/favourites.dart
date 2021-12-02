@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Favourites extends StatefulWidget {
-  const Favourites({Key? key}) : super(key: key);
+  const Favourites(  {Key? key, }) : super(key: key);
 
   @override
   _FavouritesState createState() => _FavouritesState();
@@ -22,8 +22,6 @@ class _FavouritesState extends State<Favourites> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Container(
-                        // height: 50,
-                        // width: 125,
                         alignment: Alignment.center,
                         child: const Text(
                           "Favourites",
