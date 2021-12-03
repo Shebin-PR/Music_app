@@ -26,8 +26,8 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
 
   AssetsAudioPlayer get assetsAudioPlayer => AssetsAudioPlayer.withId('0');
 
-  // List<Audio> playAudio = [];
-  // List<Audio> audio = [];
+  List<Audio> playAudio = [];
+  List<Audio> audio = [];
   bool isUserPressed = false;
   @override
   Widget build(BuildContext context) {
@@ -63,24 +63,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                   ),
                   Container(
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(100)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.blueGrey,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 6.0,
-                            spreadRadius: 1.0,
-                          )
-                        ]),
+                    decoration: shadowFunction(),
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -106,90 +89,78 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                   //           artist: element.artist)));
                   // });
                   return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: y.length,
-                      itemBuilder: (ctx, ind) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Colors.teal,
-                                    Colors.grey,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                color: Colors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.blueAccent,
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4.0, -4.0),
-                                    blurRadius: 6.0,
-                                    spreadRadius: 1.0,
-                                  )
-                                ]),
-                            child: ListTile(
-                              onTap: () {
-                                // OpenAssetAudio()
-                                //     .openAsset(index: ind, audios: playAudio);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => PlayScreen(
-                                //             songs: playAudio,
-                                //           )),
-                                // );
-                              },
-                              title: Text(
-                                y[ind].title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              subtitle: Text(
-                                "No Artist",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: PopupMenuButton(
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
+                    shrinkWrap: true,
+                    itemCount: y.length,
+                    itemBuilder: (ctx, ind) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: Container(
+                          decoration: shadowFunction(),
+                          child: ListTile(
+                            onTap: () {
+                              // OpenAssetAudio()
+                              //     .openAsset(index: ind, audios: playAudio);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => PlayScreen(
+                              //             songs: playAudio,
+                              //           )),
+                              // );
+                            },
+                            title: Text(
+                              y[ind].title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            subtitle: Text(
+                              "No Artist",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: PopupMenuButton(
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  child: TextButton(
                                     child: Text("Remove"),
-                                    value: 1,
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      y.removeWhere(
+                                        (element) =>
+                                            element.id.toString() ==
+                                            y[ind].id.toString(),
+                                      );
+                                      // playlist.put(widget.name, y);
+                                      setState(() {});
+                                    },
                                   ),
-                                ],
-                              ),
-                              leading: QueryArtworkWidget(
-                                id: y[ind].id,
-                                type: ArtworkType.AUDIO,
-                                nullArtworkWidget: CircleAvatar(
-                                  radius: 25,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/2.jpg",
-                                      fit: BoxFit.cover,
-                                      width: 50,
-                                      height: 50,
-                                    ),
+                                  value: 1,
+                                ),
+                              ],
+                            ),
+                            leading: QueryArtworkWidget(
+                              id: y[ind].id,
+                              type: ArtworkType.AUDIO,
+                              nullArtworkWidget: CircleAvatar(
+                                radius: 25,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    "assets/images/2.jpg",
+                                    fit: BoxFit.cover,
+                                    width: 50,
+                                    height: 50,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      },);
+                        ),
+                      );
+                    },
+                  );
                 },
               )
             ],
@@ -203,6 +174,27 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
         child: const Icon(Icons.add),
       ),
     ));
+  }
+
+  BoxDecoration shadowFunction() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 }
 
@@ -233,63 +225,92 @@ class _abcState extends State<abc> {
             scrollDirection: Axis.vertical,
             itemCount: k!.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  k[index].title!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.w500),
-                ),
-                leading: QueryArtworkWidget(
-                  id: k[index].id!,
-                  type: ArtworkType.AUDIO,
-                  nullArtworkWidget: CircleAvatar(
-                    radius: 25,
-                    child: ClipOval(
-                      child: Image.asset(
-                        "assets/images/2.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: shadowFunction(),
+                  child: ListTile(
+                    title: Text(
+                      k[index].title!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w500),
+                    ),
+                    leading: QueryArtworkWidget(
+                      id: k[index].id!,
+                      type: ArtworkType.AUDIO,
+                      nullArtworkWidget: CircleAvatar(
+                        radius: 25,
+                        child: ClipOval(
+                          child: Image.asset(
+                            "assets/images/2.jpg",
+                            fit: BoxFit.cover,
+                            width: 50,
+                            height: 50,
+                          ),
+                        ),
                       ),
                     ),
+                    trailing:
+                        y.where((element) => element.id == k[index].id).isEmpty
+                            ? IconButton(
+                                onPressed: () {
+                                  y.add(k[index]);
+
+                                  playlist.put(widget.name, y);
+                                  setState(() {});
+                                },
+                                icon: Icon(
+                                  Icons.add,
+                                  color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              )
+                            : IconButton(
+                                onPressed: () {
+                                  y.removeWhere(
+                                    (element) =>
+                                        element.id.toString() ==
+                                        k[index].id.toString(),
+                                  );
+                                  playlist.put(widget.name, y);
+                                  setState(() {});
+                                },
+                                icon: Icon(
+                                  Icons.minimize_outlined,
+                                   color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              ),
                   ),
                 ),
-                trailing: y
-                        .where((element) => element.id == k[index].id)
-                        .isEmpty
-                    ? IconButton(
-                        onPressed: () {
-                          y.add(k[index]);
-
-                          playlist.put(widget.name, y);
-                          setState(() {});
-                        },
-                        icon: Icon(
-                          Icons.add_box,
-                          color: Colors.black,
-                        ),
-                      )
-                    : IconButton(
-                        onPressed: () {
-                          y.removeWhere(
-                            (element) =>
-                                element.id.toString() == k[index].id.toString(),
-                          );
-                          playlist.put(widget.name, y);
-                          setState(() {});
-                        },
-                        icon: Icon(
-                          Icons.minimize_outlined,
-                          color: Colors.black,
-                        ),
-                      ),
               );
             },
           )
         ],
       ),
     );
+  }
+
+  BoxDecoration shadowFunction() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 }

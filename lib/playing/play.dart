@@ -33,7 +33,7 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.teal[900],
+            backgroundColor: Colors.blueGrey[200],
             body: assetsAudioPlayer.builderCurrent(
                 builder: (context, Playing? playing) {
               final myAudios =
@@ -47,7 +47,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            decoration: IconShadows(),
+                            decoration: imageshadowss(),
                             child: IconButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -65,7 +65,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                 )),
                           ),
                           Container(
-                              decoration: IconShadows(),
+                              decoration: imageshadowss(),
                               child: IconButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -134,7 +134,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                   )),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 50),
                       /////////////title////////////////////////////////////////////////////////////////////////////////////
                       Container(
                         width: 200,
@@ -144,17 +144,25 @@ class _PlayScreenState extends State<PlayScreen> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: Colors.grey,
+                              letterSpacing: 1,
+                              color: Colors.black,
                               fontSize: 16,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
 
                       /////////////////////////////artist/////////////////////////////////////////////////////////////////////////////
-                      Text(myAudios.metas.artist ?? "No Artist"),
-                      SizedBox(height: 10),
+                      Text(
+                        myAudios.metas.artist ?? "No Artist",
+                        style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1),
+                      ),
+                      SizedBox(height: 20),
 
                       ////////////////seek bar//////////////////////////////////////////////////////////////////////////////////////
                       assetsAudioPlayer.builderRealtimePlayingInfos(
@@ -163,17 +171,20 @@ class _PlayScreenState extends State<PlayScreen> {
                           return SizedBox();
                         }
                         return Container(
-                          width: 310,
+                         
+                          height: 10,
+                          decoration: progressDecoration(),
+                          width: 315,
                           child: ProgressBar(
                             progress: info.currentPosition,
                             total: info.duration,
                             onSeek: (to) {
                               assetsAudioPlayer.seek(to);
                             },
-                            thumbColor: Colors.brown,
-                            baseBarColor: Colors.pink[100],
-                            thumbGlowColor: Colors.pink[50],
-                            progressBarColor: Colors.pink[300],
+                            thumbColor: Colors.grey[600],
+                            baseBarColor: Colors.grey[700],
+                            thumbGlowColor: Colors.grey[800],
+                            progressBarColor: Colors.grey[800],
                           ),
                         );
                       }),
@@ -184,14 +195,14 @@ class _PlayScreenState extends State<PlayScreen> {
                         children: [
                           Container(
                             alignment: Alignment.center,
-                            decoration: IconShadows(),
+                            decoration: imageshadowss(),
                             child: IconButton(
                                 onPressed: () {
                                   assetsAudioPlayer.previous();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back_ios_new_sharp,
-                                  color: Colors.brown,
+                                  color: Colors.black,
                                 )),
                           ),
                           PlayerBuilder.isPlaying(
@@ -200,7 +211,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                 return Container(
                                   height: 80,
                                   width: 80,
-                                  decoration: IconShadows(),
+                                  decoration: imageshadowss(),
                                   child: IconButton(
                                       onPressed: () async {
                                         await assetsAudioPlayer.playOrPause();
@@ -214,14 +225,14 @@ class _PlayScreenState extends State<PlayScreen> {
                                 );
                               }),
                           Container(
-                            decoration: IconShadows(),
+                            decoration: imageshadowss(),
                             child: IconButton(
                               onPressed: () {
                                 assetsAudioPlayer.next();
                               },
                               icon: const Icon(
                                 Icons.arrow_forward_ios_sharp,
-                                color: Colors.brown,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -232,7 +243,7 @@ class _PlayScreenState extends State<PlayScreen> {
                       Container(
                         height: 55,
                         width: 55,
-                        decoration: IconShadows(),
+                        decoration: imageshadowss(),
                         child: IconButton(
                             onPressed: () {},
                             icon: const Icon(
@@ -247,23 +258,43 @@ class _PlayScreenState extends State<PlayScreen> {
             })));
   }
 
-  BoxDecoration IconShadows() {
+  BoxDecoration progressDecoration() {
     return BoxDecoration(
-        color: Colors.pink[50],
-        borderRadius: const BorderRadius.all(Radius.circular(100)),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.blueGrey,
-            offset: Offset(4.0, 4.0),
-            blurRadius: 1.0,
-            spreadRadius: 1.0,
-          ),
-          BoxShadow(
-            color: Colors.white10,
-            offset: Offset(-4.0, -4.0),
-            blurRadius: 15.0,
-            spreadRadius: 1.0,
-          )
-        ]);
+                          color: Colors.blueGrey[200],
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 1,
+                              offset: Offset(-5, -5),
+                              color: Colors.transparent,
+                            ),
+                            BoxShadow(
+                              blurRadius: 5,
+                              offset: Offset(17.5, 17.5),
+                              color: Colors.blueGrey,
+                              // color: Color.fromRGBO(214, 223, 230, 1),
+                            )
+                          ],
+                        );
+  }
+
+  BoxDecoration imageshadowss() {
+    return BoxDecoration(
+      color: Color.fromRGBO(217, 230, 243, 1),
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 1,
+          offset: Offset(-5, -5),
+          color: Colors.transparent,
+        ),
+        BoxShadow(
+          blurRadius: 5,
+          offset: Offset(17.5, 17.5),
+          color: Colors.blueGrey,
+          // color: Color.fromRGBO(214, 223, 230, 1),
+        )
+      ],
+    );
   }
 }

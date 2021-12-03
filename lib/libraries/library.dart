@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -52,24 +54,7 @@ class _LibraryState extends State<Library> {
                   ),
                   Container(
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(100)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.blueGrey,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 6.0,
-                            spreadRadius: 1.0,
-                          )
-                        ]),
+                    decoration: shadowFunction(),
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -92,36 +77,46 @@ class _LibraryState extends State<Library> {
                         width: 360,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
+                            // color: Colors.grey[200],
+                            color: Color(0XFFEFF3F6),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
                               BoxShadow(
-                                color: Colors.redAccent,
+                                color: Colors.blueGrey,
                                 offset: Offset(4.0, 4.0),
-                                blurRadius: 8.0,
+                                blurRadius: 15.0,
                                 spreadRadius: 1.0,
                               ),
                               BoxShadow(
                                 color: Colors.white,
                                 offset: Offset(-4.0, -4.0),
-                                blurRadius: 9.0,
+                                blurRadius: 6.0,
                                 spreadRadius: 1.0,
                               )
                             ]),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Favourites()));
-                            },
-                            child: Text(
-                              "Favourites",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            )),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Favourites()));
+                                },
+                                child: Text(
+                                  "Favourites",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                            Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -135,56 +130,57 @@ class _LibraryState extends State<Library> {
                   : ValueListenableBuilder(
                       valueListenable: Hive.box('playlist').listenable(),
                       builder: (context, Box playlistname, _) {
+                        List keys = playlistname.keys.toList();
+                        keys.remove("favourites");
                         return (ListView.separated(
                           physics: ScrollPhysics(),
                           scrollDirection: Axis.vertical,
-                          itemCount: playlistname.keys.length,
+                          itemCount: keys.length,
                           shrinkWrap: true,
                           itemBuilder: (context, ind) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: ListTile(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PlaylistSongs(
-                                        audios: widget.audios,
-                                        title: playlistname.keyAt(ind),
+                            return Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Container(
+                                decoration: shadowFunction(),
+                                child: ListTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PlaylistSongs(
+                                          audios: widget.audios,
+                                          title:keys[ind] ,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                  print("success");
-                                },
-                                onLongPress: () {
-                                  editPlaylist(context, playlistname, ind);
-                                },
-                                title: Text(
-                                  playlistname.keyAt(ind),
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: .5),
-                                ),
-                                trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    playlistname.deleteAt(ind);
+                                    );
+                                    print("success");
                                   },
+                                  onLongPress: () {
+                                    editPlaylist(context, playlistname, ind);
+                                  },
+                                  title: Text(
+                                    keys[ind],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: .5),
+                                  ),
+                                  trailing: IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      playlistname.deleteAt(ind);
+                                    },
+                                  ),
                                 ),
                               ),
                             );
                           },
                           separatorBuilder: (_, index) => Divider(
-                            color: Colors.white,
+                            color: Colors.blueGrey[100],
                           ),
                         ));
                       },
@@ -204,8 +200,28 @@ class _LibraryState extends State<Library> {
     );
   }
 
-///////////////////add to playlist/////////////////////////////
+  BoxDecoration shadowFunction() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
+  }
 
+///////////////////add to playlist/////////////////////////////
   Future openDialog() => showDialog(
       context: context,
       builder: (context) {
@@ -274,7 +290,6 @@ class _LibraryState extends State<Library> {
       });
 
 ///////////////////edit playlist//////////////////////
-
   Future<String?> editPlaylist(
       BuildContext context, Box<dynamic> playlistname, int ind) {
     return showDialog<String>(
@@ -353,4 +368,3 @@ class _LibraryState extends State<Library> {
         });
   }
 }
-

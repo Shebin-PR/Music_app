@@ -21,10 +21,11 @@ class AllSongs extends HiveObject {
   @HiveField(6)
   dynamic playlist;
 
-  AllSongs(
-      {required this.path,
-      required this.id,
-      required this.title,
-      required this.duration,
-      required this.artist});
+  AllSongs({
+    required this.path,
+    required this.id,
+    required this.title,
+    required this.duration,
+    required this.artist,
+  });
 }

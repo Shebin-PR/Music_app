@@ -72,24 +72,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     ////////////////////////////back arrow///////////////////////////
                     Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100)),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.blueGrey,
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 15.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-4.0, -4.0),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ]),
+                      decoration:shadowFunction(),
                       child: IconButton(
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -108,23 +91,7 @@ class _SettingsState extends State<Settings> {
                 Container(
                   height: 50,
                   width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
+                  decoration:shadowFunction(),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -140,7 +107,7 @@ class _SettingsState extends State<Settings> {
                             isSwitched = value;
                             saveSwitchState(value);
 
-                            if (isSwitched == null || isSwitched == true) {
+                            if (isSwitched == true) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: Text(
@@ -174,23 +141,7 @@ class _SettingsState extends State<Settings> {
                   height: 50,
                   width: 150,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
+                  decoration: shadowFunction(),
                   child: TextButton(
                       onPressed: () {
                         showAboutDialog(
@@ -216,23 +167,7 @@ class _SettingsState extends State<Settings> {
                   height: 50,
                   width: 150,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
+                  decoration: shadowFunction(),
                   child: TextButton(
                       onPressed: () {
                         showAboutDialog(
@@ -258,23 +193,7 @@ class _SettingsState extends State<Settings> {
                   height: 50,
                   width: 150,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
+                  decoration: shadowFunction(),
                   child: TextButton(
                       onPressed: () {
                         showAboutDialog(
@@ -302,23 +221,7 @@ class _SettingsState extends State<Settings> {
                   height: 50,
                   width: 150,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 6.0,
-                          spreadRadius: 1.0,
-                        )
-                      ]),
+                  decoration: shadowFunction(),
                   child: TextButton(
                       onPressed: () {
                         showAboutDialog(
@@ -338,5 +241,25 @@ class _SettingsState extends State<Settings> {
             ),
           )),
     );
+  }
+  BoxDecoration shadowFunction() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 }

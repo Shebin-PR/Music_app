@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/Settings/settings.dart';
-import 'package:my_app/Widgets/bottommodel.dart';
 import 'package:my_app/Widgets/popupmenu.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/libraries/favourites.dart';
@@ -17,7 +16,7 @@ import 'database/local.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  get title => null;
+  // get title => null;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -40,6 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
     bool permissionStatus = await audioQuery.permissionsStatus();
     if (!permissionStatus) {
       await audioQuery.permissionsRequest();
+      Box fav = Hive.box('playlist');
+      List favourites = [];
+      await fav.put("favourites", favourites);
     }
 
     songs = await audioQuery.querySongs();
@@ -158,8 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Favourites()));
+                                      builder: (context) => Favourites()));
                               print("favourite pressed");
                             },
                             icon: const Icon(Icons.favorite),
@@ -275,6 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 1),
 /////////////////////////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
+                  
                   child: ListView.builder(
                     padding: EdgeInsets.only(bottom: 85),
                     physics: BouncingScrollPhysics(),
@@ -314,9 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-
                               trailing: PopUpPlayFav(audio: songs[index]),
-
                               leading: QueryArtworkWidget(
                                 id: songs[index].id,
                                 type: ArtworkType.AUDIO,
@@ -439,15 +439,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-//////////////////////Blue Box Decoration//////////////////////////////////////////////////////////
+////////////////////// Box Decoration//////////////////////////////////////////////////////////
   BoxDecoration BlueShadow() {
     return BoxDecoration(
         // color: Colors.grey[200],
         color: Color(0XFFEFF3F6),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
-            color: Colors.blueAccent,
+            color: Colors.blueGrey,
             offset: Offset(4.0, 4.0),
             blurRadius: 15.0,
             spreadRadius: 1.0,

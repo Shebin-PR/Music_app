@@ -28,7 +28,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
               },
               child: Text(
                 "Create New Play",
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               )),
           playlist.isEmpty
               ? Center(
@@ -38,7 +38,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
                   valueListenable: Hive.box('playlist').listenable(),
                   builder: (context, Box box, _) {
                     var playlistname = box.keys.toList();
-
+                    playlistname.remove("favourites");
                     return (ListView.separated(
                       physics: ScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -49,11 +49,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
                         return Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.yellow,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
+                            decoration: shadowFunction(),
                             child: ListTile(
                               onTap: () {},
                               title: Text(
@@ -71,21 +67,27 @@ class _BottomPopUpState extends State<BottomPopUp> {
                                       .isEmpty
                                   ? IconButton(
                                       icon: Icon(
-                                        Icons.add_box_outlined,
-                                        color: Colors.black,
+                                        Icons.add,
+                                        color: Colors.blueGrey,
+                                        size: 30,
                                       ),
                                       onPressed: () {
-                                        playlistSongs.add(widget.audio);
+                                      List  playlistSongsp =
+                                            box.get(playlistname[ind]);
 
-                                        box.put(
-                                            playlistname[ind].toString(), playlistSongs);
+                                        playlistSongsp.add(widget.audio);
+
+                                        box.put(playlistname[ind].toString(),
+                                            playlistSongsp);
+
                                         setState(() {});
                                       },
                                     )
                                   : IconButton(
                                       icon: Icon(
-                                        Icons.check_box,
-                                        color: Colors.black,
+                                        Icons.minimize,
+                                        color: Colors.blueGrey,
+                                        size: 30,
                                       ),
                                       onPressed: () {
                                         playlistSongs.removeWhere(
@@ -96,6 +98,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
 
                                         box.put(playlistname[ind].toString(),
                                             playlistSongs);
+
                                         setState(() {});
                                       },
                                     ),
@@ -112,6 +115,27 @@ class _BottomPopUpState extends State<BottomPopUp> {
         ],
       ),
     );
+  }
+
+  BoxDecoration shadowFunction() {
+    return BoxDecoration(
+        // color: Colors.grey[200],
+        color: Color(0XFFEFF3F6),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
   }
 
   Future openDialog() => showDialog(
@@ -155,6 +179,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
               ),
               onPressed: () async {
                 var z = playlist.keys.toList();
+                // ignore: unnecessary_null_comparison
                 if (name != null) {
                   title = name.text;
                   z.where((element) => element == title).isEmpty
