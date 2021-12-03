@@ -76,9 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController name = TextEditingController();
   Box playlist = Hive.box('playlist');
   var x = [];
+  String searchtext = "";
+  List<SongModel>? results;
 
   @override
   Widget build(BuildContext context) {
+    if (searchtext.isEmpty) {
+      results = songs.toList();
+    }
+
     return SafeArea(
       child: Scaffold(
         // backgroundColor: Colors.pink[100],
@@ -96,7 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 40,
                         width: 370,
                         decoration: BlueShadow(),
-                        child: const TextField(
+                        child: TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              searchtext = value;
+                              print(searchtext);
+                              results = songs
+                                  .where((element) => element.title
+                                      .toLowerCase()
+                                      .contains(searchtext.toLowerCase()))
+                                  .toList();
+                            });
+                          },
                           decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.search,
@@ -135,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             audios: [],
                                           )),
                                 );
-                                print("Library pressed");
+                                // print("Library pressed");
                               },
                               icon: const Icon(Icons.library_music_rounded)),
                           Text(
@@ -161,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Favourites()));
-                              print("favourite pressed");
+                              // print("favourite pressed");
                             },
                             icon: const Icon(Icons.favorite),
                           ),
@@ -228,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Settings()));
-                              print("settings pressed");
+                              // print("settings pressed");
                             },
                             icon: const Icon(Icons.settings),
                           ),
@@ -253,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
                       child: TextButton(
                           onPressed: () {
-                            print("Pressed 1");
+                            // print("Pressed 1");
                           },
                           child: const Text(
                             "All Songs",
@@ -276,68 +293,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 1),
 /////////////////////////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(bottom: 85),
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: db!.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          OpenAssetAudio()
-                              .openAsset(index: index, audios: allaudios);
+                  child: results != null
+                      ? ListView.builder(
+                          padding: EdgeInsets.only(bottom: 85),
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: results!.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                // OpenAssetAudio()
+                                //     .openAsset(index: index, audios: allaudios);
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PlayScreen(
-                                      songs: allaudios,
-                                    )),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8, right: 8, bottom: 13),
-                          child: Container(
-                            decoration: BlueShadow(),
-                            child: ListTile(
-                              title: Text(
-                                songs[index].title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              subtitle: Text(
-                                songs[index].artist ?? "No Artist",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: PopUpPlayFav(audio: songs[index]),
-                              leading: QueryArtworkWidget(
-                                id: songs[index].id,
-                                type: ArtworkType.AUDIO,
-                                nullArtworkWidget: CircleAvatar(
-                                  radius: 25,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/2.jpg",
-                                      fit: BoxFit.cover,
-                                      width: 50,
-                                      height: 50,
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => PlayScreen(
+                                //             songs: allaudios,
+                                //           )),
+                                // );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8, right: 8, bottom: 13),
+                                child: Container(
+                                  decoration: BlueShadow(),
+                                  child: ListTile(
+                                    title: Text(
+                                      results![index].title,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    subtitle: Text(
+                                      results![index].artist ?? "No Artist",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    trailing:
+                                        PopUpPlayFav(audio: results![index]),
+                                    leading: QueryArtworkWidget(
+                                      id: results![index].id,
+                                      type: ArtworkType.AUDIO,
+                                      nullArtworkWidget: CircleAvatar(
+                                        radius: 25,
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                            "assets/images/2.jpg",
+                                            fit: BoxFit.cover,
+                                            width: 50,
+                                            height: 50,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                            );
+                          },
+                        )
+                      : SizedBox(),
+                )
               ],
             ),
 

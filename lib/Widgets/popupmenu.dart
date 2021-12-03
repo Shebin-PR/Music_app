@@ -21,11 +21,11 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
     List<AllSongs> songs = fav.get("music");
     Box box = Hive.box('playlist');
     List favourites = box.get("favourites");
-    print(favourites);
+    // print(favourites);
     final temp = OpenAssetAudio()
         .findSongFromDatabase(songs, widget.audio.id.toString());
     dynamic id = widget.audio.id;
-    print(id);
+    // print(id);
     return PopupMenuButton(
       itemBuilder: (context) => [
         favourites
@@ -68,7 +68,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
       ],
       onSelected: (value) {
         // if (value == "1") {
-        //   print("1111");
+        //   print("111");
         // }
         if (value == "2") {
           showModalBottomSheet(
