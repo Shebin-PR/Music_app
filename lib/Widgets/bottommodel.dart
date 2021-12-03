@@ -45,6 +45,7 @@ class _BottomPopUpState extends State<BottomPopUp> {
                       itemCount: playlistname.length,
                       shrinkWrap: true,
                       itemBuilder: (context, ind) {
+
                         var playlistSongs = box.get(playlistname[ind]);
                         return Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -72,13 +73,13 @@ class _BottomPopUpState extends State<BottomPopUp> {
                                         size: 30,
                                       ),
                                       onPressed: () {
-                                      List  playlistSongsp =
-                                            box.get(playlistname[ind]);
+                                        //  playlistSongsp =
+                                        //     box.get(playlistname[ind]);
+                                        print('daass$playlistSongs');
+                                        playlistSongs.add(widget.audio);
 
-                                        playlistSongsp.add(widget.audio);
-
-                                        box.put(playlistname[ind].toString(),
-                                            playlistSongsp);
+                                        box.put(
+                                            playlistname[ind], playlistSongs);
 
                                         setState(() {});
                                       },
@@ -90,14 +91,14 @@ class _BottomPopUpState extends State<BottomPopUp> {
                                         size: 30,
                                       ),
                                       onPressed: () {
-                                        playlistSongs.removeWhere(
+                                       playlistSongs.removeWhere(
                                           (element) =>
                                               element.id.toString() ==
                                               widget.audio.id.toString(),
                                         );
 
-                                        box.put(playlistname[ind].toString(),
-                                            playlistSongs);
+                                        box.put(
+                                            playlistname[ind], playlistSongs);
 
                                         setState(() {});
                                       },

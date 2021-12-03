@@ -28,10 +28,10 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
     print(id);
     return PopupMenuButton(
       itemBuilder: (context) => [
-        // favourites
-        //         .where((element) => element.id.toString() == temp.id.toString())
-        //         .isEmpty
-        //     ?
+        favourites
+                .where((element) => element.id.toString() == temp.id.toString())
+                .isEmpty
+            ?
         PopupMenuItem(
           onTap: () async {
             favourites.add(temp);
@@ -43,20 +43,20 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
             );
           },
           child: Text("Add to favourite"),
-        ),
-        // : PopupMenuItem(
-        //     onTap: () async {
-        //       favourites.removeWhere(
-        //           (element) => element.id.toString() == temp.id.toString());
-        //       await fav.put("favourites", favourites);
-        //       ScaffoldMessenger.of(context).showSnackBar(
-        //         SnackBar(
-        //           content: Text(temp.title! + " Removed from Favourites"),
-        //         ),
-        //       );
-        //     },
-        //     child: Text("Remove from favourite"),
-        //   ),
+        )
+        : PopupMenuItem(
+            onTap: () async {
+              favourites.removeWhere(
+                  (element) => element.id.toString() == temp.id.toString());
+              await box.put("favourites", favourites);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(temp.title! + " Removed from Favourites"),
+                ),
+              );
+            },
+            child: Text("Remove from favourite"),
+          ),
         // PopupMenuItem(
         //   child: Text("Add to Favourites"),
         //   value: "1",

@@ -12,9 +12,6 @@ void main() async {
   Hive.registerAdapter(AllSongsAdapter());
   await Hive.openBox<List<AllSongs>>("songdata");
   await Hive.openBox("playlist");
- 
- 
-
   Hive.registerAdapter(PlayListModelAdapter());
   runApp(const MyApp());
 }

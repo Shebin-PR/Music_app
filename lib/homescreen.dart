@@ -276,7 +276,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 1),
 /////////////////////////////////////////// songs tiles /////////////////////////////////////////////////////////////////
                 Expanded(
-                  
                   child: ListView.builder(
                     padding: EdgeInsets.only(bottom: 85),
                     physics: BouncingScrollPhysics(),
