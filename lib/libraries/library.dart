@@ -113,7 +113,7 @@ class _LibraryState extends State<Library> {
                                 )),
                             Icon(
                               Icons.favorite,
-                              color: Colors.red,
+                              color: Colors.black,
                             )
                           ],
                         ),
