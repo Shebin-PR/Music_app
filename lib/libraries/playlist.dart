@@ -81,13 +81,13 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                 valueListenable: Hive.box('playlist').listenable(),
                 builder: (BuildContext context, Box play, _) {
                   List y = play.get(widget.title);
-                  // y.forEach((element) {
-                  //   playAudio.add(Audio.file(element.path,
-                  //       metas: Metas(
-                  //           title: element.title,
-                  //           id: element.id.toString(),
-                  //           artist: element.artist)));
-                  // });
+                  y.forEach((element) {
+                    playAudio.add(Audio.file(element.path,
+                        metas: Metas(
+                            title: element.title,
+                            id: element.id.toString(),
+                            artist: element.artist)));
+                  });
                   return ListView.builder(
                     shrinkWrap: true,
                     itemCount: y.length,
@@ -98,15 +98,15 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                           decoration: shadowFunction(),
                           child: ListTile(
                             onTap: () {
-                              // OpenAssetAudio()
-                              //     .openAsset(index: ind, audios: playAudio);
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => PlayScreen(
-                              //             songs: playAudio,
-                              //           )),
-                              // );
+                              OpenAssetAudio()
+                                  .openAsset(index: ind, audios: playAudio);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PlayScreen(
+                                          songs: playAudio,
+                                        )),
+                              );
                             },
                             title: Text(
                               y[ind].title,
@@ -177,6 +177,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
   }
 
   BoxDecoration shadowFunction() {
+    
     return BoxDecoration(
         // color: Colors.grey[200],
         color: Color(0XFFEFF3F6),

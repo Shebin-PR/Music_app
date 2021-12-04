@@ -24,7 +24,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
     // print(favourites);
     final temp = OpenAssetAudio()
         .findSongFromDatabase(songs, widget.audio.id.toString());
-    dynamic id = widget.audio.id;
+    // dynamic id = widget.audio.id;
     // print(id);
     return PopupMenuButton(
       itemBuilder: (context) => [
@@ -38,7 +38,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
             await box.put("favourites", favourites);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(temp.title! + " Added to Favourites"),
+                content: Text(temp.title! + "added successfully"),
               ),
             );
           },
@@ -51,7 +51,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
               await box.put("favourites", favourites);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(temp.title! + " Removed from Favourites"),
+                  content: Text(temp.title! + "removed successfully"),
                 ),
               );
             },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_app/database/datamodel.dart';
 
 class BottomPopUp extends StatefulWidget {
   BottomPopUp({Key? key, required this.audio}) : super(key: key);
@@ -71,10 +72,18 @@ class _BottomPopUpState extends State<BottomPopUp> {
                                         color: Colors.blueGrey,
                                         size: 30,
                                       ),
-                                      onPressed: () {
-                                        playlistSongs.add(widget.audio);
-                                        box.put(
-                                            playlistname[ind], playlistSongs);
+                                      onPressed: () async {
+                                         AllSongs a = AllSongs(
+                                            path: widget.audio.uri,
+                                            id: widget.audio.id,
+                                            title: title,
+                                            duration: widget.audio.duration,
+                                            artist: widget.audio.artist);
+                                        playlistSongs.add(a);
+                                       
+
+                                        await playlist.put(playlistname[ind],
+                                            playlistSongs );
 
                                         setState(() {});
                                       },

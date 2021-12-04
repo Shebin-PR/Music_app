@@ -16,7 +16,7 @@ import 'database/local.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  // get title => null;
+  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -71,11 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<AllSongs>? db = [];
   Box<List<AllSongs>> box = Boxes.getSongsDb();
   List<Audio> allaudios = [];
-  String? title;
-  List y = [];
+  // String? title;
+  // List y = [];
   TextEditingController name = TextEditingController();
   Box playlist = Hive.box('playlist');
-  var x = [];
+  // var x = [];
   String searchtext = "";
   List<SongModel>? results;
 
@@ -303,16 +303,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                // OpenAssetAudio()
-                                //     .openAsset(index: index, audios: allaudios);
+                                OpenAssetAudio()
+                                    .openAsset(index: index, audios: allaudios);
 
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => PlayScreen(
-                                //             songs: allaudios,
-                                //           )),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PlayScreen(
+                                            songs: allaudios,
+                                          )),
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(

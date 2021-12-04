@@ -188,7 +188,7 @@ class _LibraryState extends State<Library> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton( 
           onPressed: () {
             openDialog();
             print("lib float");
@@ -274,13 +274,13 @@ class _LibraryState extends State<Library> {
                           : playlist
                       : ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: const Text('This name is already exist'),
+                            content: const Text('Playlist already exist'),
                             duration: const Duration(seconds: 1),
                           ),
                         );
 
                   setState(() {});
-                  Navigator.pop(context, 'OK');
+                  Navigator.pop(context);
                   // name.clear();
                 }
               },
@@ -337,7 +337,7 @@ class _LibraryState extends State<Library> {
                             : playlist
                         : ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text('This name is already exist'),
+                              content: const Text('Playlist already exist'),
                               duration: const Duration(seconds: 1),
                             ),
                           );
@@ -351,11 +351,11 @@ class _LibraryState extends State<Library> {
                         : playlist;
                   }
                   setState(() {});
-                  Navigator.pop(context, 'OK');
+                  Navigator.pop(context);
                   // name.clear();
                 },
                 child: const Text(
-                  "CREATE",
+                  "Save",
                   style: TextStyle(
                       letterSpacing: 1,
                       color: Colors.black,
