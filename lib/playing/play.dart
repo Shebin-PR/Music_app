@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:my_app/Widgets/popupmenu.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -171,7 +172,6 @@ class _PlayScreenState extends State<PlayScreen> {
                           return SizedBox();
                         }
                         return Container(
-                         
                           height: 10,
                           decoration: progressDecoration(),
                           width: 315,
@@ -239,17 +239,35 @@ class _PlayScreenState extends State<PlayScreen> {
                         ],
                       ),
                       SizedBox(height: 40),
-                      /////////////////favourites//////////////////////////////////
-                      Container(
-                        height: 55,
-                        width: 55,
-                        decoration: imageshadowss(),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
-                            )),
+                      /////////////////playlist- favourites//////////////////////////////////
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            height: 55,
+                            width: 55,
+                            decoration: imageshadowss(),
+                            child: IconButton(
+                                onPressed: () {
+                                  // PopUpPlayFav(audio: widget.songs);
+                                },
+                                icon: const Icon(
+                                  Icons.playlist_add_sharp,
+                                  color: Colors.black,
+                                )),
+                          ),
+                          Container(
+                            height: 55,
+                            width: 55,
+                            decoration: imageshadowss(),
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.black,
+                                )),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -260,22 +278,22 @@ class _PlayScreenState extends State<PlayScreen> {
 
   BoxDecoration progressDecoration() {
     return BoxDecoration(
-                          color: Colors.blueGrey[200],
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 1,
-                              offset: Offset(-5, -5),
-                              color: Colors.transparent,
-                            ),
-                            BoxShadow(
-                              blurRadius: 5,
-                              offset: Offset(17.5, 17.5),
-                              color: Colors.blueGrey,
-                              // color: Color.fromRGBO(214, 223, 230, 1),
-                            )
-                          ],
-                        );
+      color: Colors.blueGrey[200],
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 1,
+          offset: Offset(-5, -5),
+          color: Colors.transparent,
+        ),
+        BoxShadow(
+          blurRadius: 5,
+          offset: Offset(17.5, 17.5),
+          color: Colors.blueGrey,
+          // color: Color.fromRGBO(214, 223, 230, 1),
+        )
+      ],
+    );
   }
 
   BoxDecoration imageshadowss() {

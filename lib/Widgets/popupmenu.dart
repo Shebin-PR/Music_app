@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/database/local.dart';
-import 'package:my_app/playing/notification.dart';
+import 'package:my_app/playing/openassetaudio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'bottommodel.dart';
 
+// ignore: must_be_immutable
 class PopUpPlayFav extends StatefulWidget {
   PopUpPlayFav({Key? key, required this.audio}) : super(key: key);
   SongModel audio;

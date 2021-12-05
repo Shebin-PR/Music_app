@@ -8,7 +8,7 @@ import 'package:my_app/Widgets/popupmenu.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/library.dart';
-import 'package:my_app/playing/notification.dart';
+import 'package:my_app/playing/openassetaudio.dart';
 import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'database/local.dart';
@@ -16,7 +16,6 @@ import 'database/local.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -191,46 +190,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-
-                    ///////////////////// recent //////////////////////////
-                    // Container(
-                    //     width: 85,
-                    //     height: 80,
-                    //     decoration: BoxDecoration(
-                    //         // color: Colors.grey[200],
-                    //         color: Color(0XFFEFF3F6),
-                    //         borderRadius: BorderRadius.circular(15),
-                    //         boxShadow: const [
-                    //           BoxShadow(
-                    //             color: Colors.blueAccent,
-                    //             offset: Offset(4.0, 4.0),
-                    //             blurRadius: 15.0,
-                    //             spreadRadius: 1.0,
-                    //           ),
-                    //           BoxShadow(
-                    //             color: Colors.white,
-                    //             offset: Offset(-4.0, -4.0),
-                    //             blurRadius: 6.0,
-                    //             spreadRadius: 1.0,
-                    //           )
-                    //         ]),
-                    //     child: Column(
-                    //       children: [
-                    //         IconButton(
-                    //           onPressed: () {
-                    //             print("recent pressed");
-                    //           },
-                    //           icon:
-                    //               const Icon(Icons.access_time_filled_outlined),
-                    //         ),
-                    //         Text(
-                    //           "Recent",
-                    //           style: TextStyle(
-                    //               color: Colors.grey[800],
-                    //               fontWeight: FontWeight.bold),
-                    //         )
-                    //       ],
-                    //     )),
 
                     ////////////////// settings ///////////////////////////////
                     Container(
