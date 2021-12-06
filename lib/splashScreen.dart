@@ -36,8 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 650,
               width: 500,
-              child: Lottie.network(
-                  "https://assets1.lottiefiles.com/datafiles/ovL488ma5whkm8k/data.json"),
+              child: Lottie.asset("assets/images/splashback.json"),
             ),
             Text(
               "Lullaby",
