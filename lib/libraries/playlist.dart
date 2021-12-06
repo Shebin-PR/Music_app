@@ -117,7 +117,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                                   fontWeight: FontWeight.w500),
                             ),
                             subtitle: Text(
-                              "No Artist",
+                              y[ind].artist ?? "No Artist",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -177,7 +177,6 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
   }
 
   BoxDecoration shadowFunction() {
-    
     return BoxDecoration(
         // color: Colors.grey[200],
         color: Color(0XFFEFF3F6),
@@ -280,7 +279,7 @@ class _abcState extends State<abc> {
                                 },
                                 icon: Icon(
                                   Icons.minimize_outlined,
-                                   color: Colors.blueGrey,
+                                  color: Colors.blueGrey,
                                   size: 30,
                                 ),
                               ),

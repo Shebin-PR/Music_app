@@ -97,7 +97,7 @@ class _FavouritesState extends State<Favourites> {
                                   .openAsset(index: ind, audios: music);
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
+                                MaterialPageRoute( 
                                     builder: (context) => PlayScreen(
                                           songs: music,
                                         )),
@@ -112,18 +112,18 @@ class _FavouritesState extends State<Favourites> {
                                   fontWeight: FontWeight.w500),
                             ),
                             subtitle: Text(
-                              "No Artist",
+                              favourites[ind].artist ?? "No artist",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            trailing: PopupMenuButton(
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  child: Text("Remove"),
-                                  value: 1,
-                                ),
-                              ],
-                            ),
+                            // trailing: PopupMenuButton(
+                            //   itemBuilder: (context) => [
+                            //     PopupMenuItem(
+                            //       child: Text("Remove"),
+                            //       value: 1,
+                            //     ),
+                            //   ],
+                            // ),
                             leading: QueryArtworkWidget(
                               id: favourites[ind].id!,
                               type: ArtworkType.AUDIO,

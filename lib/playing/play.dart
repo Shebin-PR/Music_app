@@ -1,17 +1,21 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:my_app/Widgets/popupmenu.dart';
+import 'package:my_app/Widgets/bottommodel.dart';
+import 'package:my_app/Widgets/favouritesicon.dart';
+import 'package:my_app/database/datamodel.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import '../libraries/library.dart';
 
 class PlayScreen extends StatefulWidget {
-  final songs;
+  var songs;
+  final List<SongModel> audio;
   PlayScreen({
     Key? key,
     required this.songs,
+    this.audio = const [],
   }) : super(key: key);
 
   @override
@@ -24,12 +28,9 @@ class _PlayScreenState extends State<PlayScreen> {
     return source.firstWhere((element) => element.path == fromPath);
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   var duration;
+  AllSongs? music;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,6 +81,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         ],
                       ),
                       SizedBox(height: 40),
+
                       Container(
                         height: 180,
                         width: 260,
@@ -136,6 +138,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         ),
                       ),
                       SizedBox(height: 50),
+
                       /////////////title////////////////////////////////////////////////////////////////////////////////////
                       Container(
                         width: 200,
@@ -188,10 +191,10 @@ class _PlayScreenState extends State<PlayScreen> {
                           ),
                         );
                       }),
-                      
+
                       ////////////////////controls//////////////////////////////////////////////////////////////
                       SizedBox(height: 50),
-                      
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -241,31 +244,47 @@ class _PlayScreenState extends State<PlayScreen> {
                         ],
                       ),
                       SizedBox(height: 40),
-                      
+
                       /////////////////playlist- favourites//////////////////////////////////
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          widget.audio.isNotEmpty
+                              ? Container(
+                                  height: 55,
+                                  width: 55,
+                                  decoration: imageshadowss(),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        if (widget.audio.isNotEmpty) {
+                                          var ply = widget.audio.firstWhere(
+                                              (element) =>
+                                                  element.id.toString() ==
+                                                  myAudios.metas.id.toString());
+
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: (context) =>
+                                                  BottomPopUp(audio: ply));
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.playlist_add_sharp,
+                                        color: Colors.black,
+                                      )),
+                                )
+                              : SizedBox(),
+
+                          /////////////////////////////favourites////////////////////////
                           Container(
                             height: 55,
                             width: 55,
                             decoration: imageshadowss(),
                             child: IconButton(
                                 onPressed: () {
-                                  // PopUpPlayFav(audio: widget.songs);
+                                  FavouritesIcon(
+                                      music: music, myAudios: myAudios);
                                 },
-                                icon: const Icon(
-                                  Icons.playlist_add_sharp,
-                                  color: Colors.black,
-                                )),
-                          ),
-                        
-                          Container(
-                            height: 55,
-                            width: 55,
-                            decoration: imageshadowss(),
-                            child: IconButton(
-                                onPressed: () {},
                                 icon: const Icon(
                                   Icons.favorite_border,
                                   color: Colors.black,
@@ -306,7 +325,7 @@ class _PlayScreenState extends State<PlayScreen> {
       borderRadius: BorderRadius.circular(10),
       boxShadow: [
         BoxShadow(
-          blurRadius: 1,
+          blurRadius: 5,
           offset: Offset(-5, -5),
           color: Colors.transparent,
         ),

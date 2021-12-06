@@ -46,11 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
     songs = await audioQuery.querySongs();
     Datasongs = songs
         .map((e) => AllSongs(
-            path: e.uri!,
-            id: e.id,
-            title: e.title,
-            duration: e.duration,
-            artist: e.artist))
+              path: e.uri!,
+              id: e.id,
+              title: e.title,
+              duration: e.duration,
+              artist: e.artist,
+            ))
         .toList();
 
     await box.put("music", Datasongs);
@@ -260,16 +261,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.vertical,
                           itemCount: results!.length,
                           itemBuilder: (context, index) {
+                            List<Audio> audioSongs = results!
+                                .map((element) => Audio.file(element.uri!,
+                                    metas: Metas(
+                                        title: element.title,
+                                        id: element.id.toString(),
+                                        artist: element.artist)))
+                                .toList();
                             return GestureDetector(
                               onTap: () {
-                                OpenAssetAudio()
-                                    .openAsset(index: index, audios: allaudios);
+                                OpenAssetAudio().openAsset(
+                                    index: index, audios: audioSongs);
 
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PlayScreen(
-                                            songs: allaudios,
+                                            songs: allaudios,audio: songs,
                                           )),
                                 );
                               },

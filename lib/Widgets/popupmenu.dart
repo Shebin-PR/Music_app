@@ -22,55 +22,46 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
     List<AllSongs> songs = fav.get("music");
     Box box = Hive.box('playlist');
     List favourites = box.get("favourites");
-    // print(favourites);
+
     final temp = OpenAssetAudio()
         .findSongFromDatabase(songs, widget.audio.id.toString());
-    // dynamic id = widget.audio.id;
-    // print(id);
+
     return PopupMenuButton(
       itemBuilder: (context) => [
         favourites
                 .where((element) => element.id.toString() == temp.id.toString())
                 .isEmpty
-            ?
-        PopupMenuItem(
-          onTap: () async {
-            favourites.add(temp);
-            await box.put("favourites", favourites);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(temp.title! + "added successfully"),
+            ? PopupMenuItem(
+                onTap: () async {
+                  favourites.add(temp);
+                  await box.put("favourites", favourites);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(temp.title! + "added successfully"),
+                    ),
+                  );
+                },
+                child: Text("Add to favourite"),
+              )
+            : PopupMenuItem(
+                onTap: () async {
+                  favourites.removeWhere(
+                      (element) => element.id.toString() == temp.id.toString());
+                  await box.put("favourites", favourites);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(temp.title! + "removed successfully"),
+                    ),
+                  );
+                },
+                child: Text("Remove from favourite"),
               ),
-            );
-          },
-          child: Text("Add to favourite"),
-        )
-        : PopupMenuItem(
-            onTap: () async {
-              favourites.removeWhere(
-                  (element) => element.id.toString() == temp.id.toString());
-              await box.put("favourites", favourites);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(temp.title! + "removed successfully"),
-                ),
-              );
-            },
-            child: Text("Remove from favourite"),
-          ),
-        // PopupMenuItem(
-        //   child: Text("Add to Favourites"),
-        //   value: "1",
-        // ),
         PopupMenuItem(
           child: Text("Add to playlists"),
           value: "2",
         ),
       ],
       onSelected: (value) {
-        // if (value == "1") {
-        //   print("111");
-        // }
         if (value == "2") {
           showModalBottomSheet(
               context: context,

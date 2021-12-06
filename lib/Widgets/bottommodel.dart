@@ -73,17 +73,16 @@ class _BottomPopUpState extends State<BottomPopUp> {
                                         size: 30,
                                       ),
                                       onPressed: () async {
-                                         AllSongs a = AllSongs(
+                                        AllSongs a = AllSongs(
                                             path: widget.audio.uri,
                                             id: widget.audio.id,
-                                            title: title,
+                                            title: widget.audio.title,
                                             duration: widget.audio.duration,
                                             artist: widget.audio.artist);
                                         playlistSongs.add(a);
-                                       
 
-                                        await playlist.put(playlistname[ind],
-                                            playlistSongs );
+                                        await playlist.put(
+                                            playlistname[ind], playlistSongs);
 
                                         setState(() {});
                                       },
