@@ -188,8 +188,10 @@ class _PlayScreenState extends State<PlayScreen> {
                           ),
                         );
                       }),
+                      
                       ////////////////////controls//////////////////////////////////////////////////////////////
                       SizedBox(height: 50),
+                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -239,6 +241,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         ],
                       ),
                       SizedBox(height: 40),
+                      
                       /////////////////playlist- favourites//////////////////////////////////
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -256,6 +259,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                   color: Colors.black,
                                 )),
                           ),
+                        
                           Container(
                             height: 55,
                             width: 55,

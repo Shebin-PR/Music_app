@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/splashScreen.dart';
 import 'database/datamodel.dart';
 import 'database/playlistmodel.dart';
 import 'homescreen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
