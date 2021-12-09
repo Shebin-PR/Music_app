@@ -41,225 +41,238 @@ class _SettingsState extends State<Settings> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.grey[200],
-          body: Padding(
-            padding: EdgeInsets.only(left: 15, top: 20, right: 15),
-            child: ListView(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Container(
-                        height: 50,
-                        width: 115,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Settings",
-                          style: TextStyle(
-                              shadows: [
-                                Shadow(
-                                    offset: Offset(0, -10), color: Colors.black)
-                              ],
-                              decoration: TextDecoration.underline,
-                              decorationColor: Colors.green,
-                              decorationThickness: 3,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.transparent),
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xffE4E5E6),
+                  Color(0xff00416A),
+                  Color(0xff928DAB),
+                ],
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(left: 15, top: 20, right: 15),
+              child: ListView(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Container(
+                          height: 50,
+                          width: 115,
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Settings",
+                            style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                      offset: Offset(0, -10),
+                                      color: Colors.black)
+                                ],
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.green,
+                                decorationThickness: 3,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.transparent),
+                          ),
                         ),
                       ),
-                    ),
-                    ////////////////////////////back arrow///////////////////////////
-                    Container(
-                      decoration:shadowFunction(),
-                      child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down_sharp,
-                            color: Colors.black,
-                            size: 30,
-                          )),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 50),
-
-                //////////////////////////notification/////////////////////////////////////
-                Container(
-                  height: 50,
-                  width: 150,
-                  decoration:shadowFunction(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Notification",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal)),
-                      Switch(
-                        value: isSwitched,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isSwitched = value;
-                            saveSwitchState(value);
-
-                            if (isSwitched == true) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(
-                                  'Restart app for changes..!',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: Colors.grey[900],
-                              ));
-                            } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(
-                                  'Restart app for changes..!',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: Colors.grey[900],
-                              ));
-                            }
-                          });
-                        },
-                        inactiveTrackColor: Colors.grey,
-                        activeTrackColor: Colors.red,
+                      ////////////////////////////back arrow///////////////////////////
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: const Icon(
+                              Icons.keyboard_arrow_down_sharp,
+                              color: Colors.white,
+                              size: 30,
+                            )),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 15),
+                  const SizedBox(height: 50),
 
-                /////////////////////////terms of service/////////////////////////////////////
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: shadowFunction(),
-                  child: TextButton(
-                      onPressed: () {
-                        showAboutDialog(
-                            context: context,
-                            applicationName: "Myuuusic",
-                            children: [
-                              Text(
-                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-                            ]);
-                      },
-                      child: Text(
-                        "Terms Of Service",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
+                  //////////////////////////notification/////////////////////////////////////
+                  Container(
+                    height: 50,
+                    width: 150,
+                    decoration: shadowFunction(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Notification",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal)),
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (bool value) {
+                            setState(() {
+                              isSwitched = value;
+                              saveSwitchState(value);
 
-                //////////////////////privacy policy/////////////////////////////////////////
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: shadowFunction(),
-                  child: TextButton(
-                      onPressed: () {
-                        showAboutDialog(
-                            context: context,
-                            applicationName: "Myuuusic",
-                            children: [
-                              Text(
-                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-                            ]);
-                      },
-                      child: Text(
-                        "Privacy Policy",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
+                              if (isSwitched == true) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Restart app for changes..!',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.grey[900],
+                                ));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Restart app for changes..!',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.grey[900],
+                                ));
+                              }
+                            });
+                          },
+                          inactiveTrackColor: Colors.grey,
+                          activeTrackColor: Colors.red,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
 
-                /////////////////////////about//////////////////////////////////////
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: shadowFunction(),
-                  child: TextButton(
-                      onPressed: () {
-                        showAboutDialog(
-                            context: context,
-                            applicationName: "Myuuusic",
-                            children: [
-                              Text(
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                                style: TextStyle(color: Colors.black),
-                              )
-                            ]);
-                      },
-                      child: Text(
-                        "About",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-                const SizedBox(height: 15),
+                  /////////////////////////terms of service/////////////////////////////////////
+                  Container(
+                    height: 50,
+                    width: 150,
+                    alignment: Alignment.center,
+                    decoration: shadowFunction(),
+                    child: TextButton(
+                        onPressed: () {
+                          // showAboutDialog(
+                          //     context: context,
+                          //     applicationName: "Lullaby",
+                          //     children: [Text("")]);
+                        },
+                        child: Text(
+                          "Terms Of Service",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                        )),
+                  ),
+                  const SizedBox(height: 15),
 
-                //////////////////////version////////////////////////////////////////
-                Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: shadowFunction(),
-                  child: TextButton(
-                      onPressed: () {
-                        showAboutDialog(
-                            context: context,
-                            applicationName: "Myuuusic",
-                            children: [Text("Version : 1.0.1")]);
-                      },
-                      child: Text(
-                        "Version 1.0.1",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      )),
-                ),
-              ],
+                  //////////////////////privacy policy/////////////////////////////////////////
+                  Container(
+                    height: 50,
+                    width: 150,
+                    alignment: Alignment.center,
+                    decoration: shadowFunction(),
+                    child: TextButton(
+                        onPressed: () {
+                          // showAboutDialog(
+                          // context: context,
+                          // applicationName: "Lullaby",
+                          // children: [Text("")]);
+                        },
+                        child: Text(
+                          "Privacy Policy",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                        )),
+                  ),
+                  const SizedBox(height: 15),
+
+                  /////////////////////////about//////////////////////////////////////
+                  Container(
+                    height: 50,
+                    width: 150,
+                    alignment: Alignment.center,
+                    decoration: shadowFunction(),
+                    child: TextButton(
+                        onPressed: () {
+                          showAboutDialog(
+                              context: context,
+                              applicationName: "Lullaby",
+                              children: [
+                                Text(
+                                  "Lullaby .is a Ad free MP3 Music Player that plays local content.Tiny Music player with Awesome UI, Multi format support, etc. It can fulfill all your need about a local music playing.",
+                                  style: TextStyle(color: Colors.black),
+                                )
+                              ]);
+                        },
+                        child: Text(
+                          "About",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                        )),
+                  ),
+                  const SizedBox(height: 15),
+
+                  //////////////////////version////////////////////////////////////////
+                  Container(
+                    height: 50,
+                    width: 150,
+                    alignment: Alignment.center,
+                    decoration: shadowFunction(),
+                    child: TextButton(
+                        onPressed: () {
+                          showAboutDialog(
+                              context: context,
+                              applicationName: "Lullaby",
+                              children: [Text("Version : 1.0.1")]);
+                        },
+                        child: Text(
+                          "Version 1.0.1",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                        )),
+                  ),
+                ],
+              ),
             ),
           )),
     );
   }
+
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-        // color: Colors.grey[200],
-        color: Color(0XFFEFF3F6),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.blueGrey,
-            offset: Offset(4.0, 4.0),
-            blurRadius: 15.0,
-            spreadRadius: 1.0,
-          ),
-          BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4.0, -4.0),
-            blurRadius: 6.0,
-            spreadRadius: 1.0,
-          )
-        ]);
+      // color: Colors.grey[200],
+      color: Colors.black12,
+      borderRadius: BorderRadius.circular(10),
+      // boxShadow: const [
+      //   BoxShadow(
+      //     color: Colors.blueGrey,
+      //     offset: Offset(4.0, 4.0),
+      //     blurRadius: 15.0,
+      //     spreadRadius: 1.0,
+      //   ),
+      //   BoxShadow(
+      //     color: Colors.white,
+      //     offset: Offset(-4.0, -4.0),
+      //     blurRadius: 6.0,
+      //     spreadRadius: 1.0,
+      //   )
+      // ]
+    );
   }
 }

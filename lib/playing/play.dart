@@ -9,6 +9,7 @@ import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import '../libraries/library.dart';
 
+// ignore: must_be_immutable
 class PlayScreen extends StatefulWidget {
   var songs;
   final List<SongModel> audio;
@@ -29,7 +30,6 @@ class _PlayScreenState extends State<PlayScreen> {
   }
 
   var duration;
-  AllSongs? music;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +41,16 @@ class _PlayScreenState extends State<PlayScreen> {
               final myAudios =
                   find(widget.songs, playing!.audio.assetAudioPath);
               return Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xff000428),
+                      Color(0xff004e92),
+                    ],
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
@@ -88,19 +98,6 @@ class _PlayScreenState extends State<PlayScreen> {
                         decoration: BoxDecoration(
                           color: Color.fromRGBO(217, 230, 243, 1),
                           borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 1,
-                              offset: Offset(-5, -5),
-                              color: Colors.transparent,
-                            ),
-                            BoxShadow(
-                              blurRadius: 5,
-                              offset: Offset(10.5, 10.5),
-                              color: Colors.blueGrey,
-                              // color: Color.fromRGBO(214, 223, 230, 1),
-                            )
-                          ],
                         ),
                         child: Center(
                           child: LayoutBuilder(
@@ -161,12 +158,12 @@ class _PlayScreenState extends State<PlayScreen> {
                       Text(
                         myAudios.metas.artist ?? "No Artist",
                         style: TextStyle(
-                            color: Colors.grey[700],
+                            color: Colors.grey[600],
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 30),
 
                       ////////////////seek bar//////////////////////////////////////////////////////////////////////////////////////
                       assetsAudioPlayer.builderRealtimePlayingInfos(
@@ -176,7 +173,6 @@ class _PlayScreenState extends State<PlayScreen> {
                         }
                         return Container(
                           height: 10,
-                          decoration: progressDecoration(),
                           width: 315,
                           child: ProgressBar(
                             progress: info.currentPosition,
@@ -193,7 +189,7 @@ class _PlayScreenState extends State<PlayScreen> {
                       }),
 
                       ////////////////////controls//////////////////////////////////////////////////////////////
-                      SizedBox(height: 50),
+                      SizedBox(height: 60),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -243,53 +239,43 @@ class _PlayScreenState extends State<PlayScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 50),
 
                       /////////////////playlist- favourites//////////////////////////////////
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          widget.audio.isNotEmpty
-                              ? Container(
-                                  height: 55,
-                                  width: 55,
-                                  decoration: imageshadowss(),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        if (widget.audio.isNotEmpty) {
-                                          var ply = widget.audio.firstWhere(
-                                              (element) =>
-                                                  element.id.toString() ==
-                                                  myAudios.metas.id.toString());
-
-                                          showModalBottomSheet(
-                                              context: context,
-                                              builder: (context) =>
-                                                  BottomPopUp(audio: ply));
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.playlist_add_sharp,
-                                        color: Colors.black,
-                                      )),
-                                )
-                              : SizedBox(),
-
-                          /////////////////////////////favourites////////////////////////
                           Container(
                             height: 55,
                             width: 55,
                             decoration: imageshadowss(),
                             child: IconButton(
                                 onPressed: () {
-                                  FavouritesIcon(
-                                      music: music, myAudios: myAudios);
+                                  if (widget.audio.isNotEmpty) {
+                                    var ply = widget.audio.firstWhere(
+                                        (element) =>
+                                            element.id.toString() ==
+                                            myAudios.metas.id.toString());
+
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) =>
+                                            BottomPopUp(audio: ply));
+                                  }
                                 },
                                 icon: const Icon(
-                                  Icons.favorite_border,
+                                  Icons.playlist_add_sharp,
                                   color: Colors.black,
                                 )),
                           ),
+
+                          /////////////////////////////favourites////////////////////////
+                          // Container(
+                          //   height: 55,
+                          //   width: 55,
+                          //   decoration: imageshadowss(),
+                          //   child: FavouritesIcon(myAudios: myAudios),
+                          // ),
                         ],
                       ),
                     ],
@@ -323,19 +309,6 @@ class _PlayScreenState extends State<PlayScreen> {
     return BoxDecoration(
       color: Color.fromRGBO(217, 230, 243, 1),
       borderRadius: BorderRadius.circular(10),
-      boxShadow: [
-        BoxShadow(
-          blurRadius: 5,
-          offset: Offset(-5, -5),
-          color: Colors.transparent,
-        ),
-        BoxShadow(
-          blurRadius: 5,
-          offset: Offset(17.5, 17.5),
-          color: Colors.blueGrey,
-          // color: Color.fromRGBO(214, 223, 230, 1),
-        )
-      ],
     );
   }
 }

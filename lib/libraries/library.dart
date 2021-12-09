@@ -28,167 +28,178 @@ class _LibraryState extends State<Library> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
-          child: ListView(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Library",
-                      style: TextStyle(
-                          shadows: [
-                            Shadow(offset: Offset(0, -10), color: Colors.black)
-                          ],
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.green,
-                          decorationThickness: 3,
-                          fontSize: 25,
-                          letterSpacing: .7,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.transparent),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    decoration: shadowFunction(),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down_sharp,
-                          color: Colors.black,
-                          size: 30,
-                        )),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 360,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            // color: Colors.grey[200],
-                            color: Color(0XFFEFF3F6),
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.blueGrey,
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 15.0,
-                                spreadRadius: 1.0,
-                              ),
-                              BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(-4.0, -4.0),
-                                blurRadius: 6.0,
-                                spreadRadius: 1.0,
-                              )
-                            ]),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Favourites()));
-                                },
-                                child: Text(
-                                  "Favourites",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xffE4E5E6),
+                Color(0xff00416A),
+                Color(0xff928DAB),
+              ],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Library",
+                        style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(0, -10), color: Colors.black)
+                            ],
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.green,
+                            decorationThickness: 3,
+                            fontSize: 25,
+                            letterSpacing: .7,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.transparent),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                ],
-              ),
-              playlist.isEmpty
-                  ? Center(
-                      child: SizedBox(),
-                    )
-                  : ValueListenableBuilder(
-                      valueListenable: Hive.box('playlist').listenable(),
-                      builder: (context, Box playlistname, _) {
-                        List keys = playlistname.keys.toList();
-                        keys.remove("favourites");
-                        return (ListView.separated(
-                          physics: ScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: keys.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, ind) {
-                            return Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Container(
-                                decoration: shadowFunction(),
-                                child: ListTile(
-                                  onTap: () {
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.black),
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: Colors.white,
+                            size: 30,
+                          )),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 360,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft,
+                              colors: [
+                                Color(0xff00416A),
+                                Color(0xff928DAB),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
                                     Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PlaylistSongs(
-                                          audios: widget.audios,
-                                          title:keys[ind] ,
-                                        ),
-                                      ),
-                                    );
-                                    print("success");
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Favourites()));
                                   },
-                                  onLongPress: () {
-                                    editPlaylist(context, playlistname, ind);
-                                  },
-                                  title: Text(
-                                    keys[ind],
+                                  child: Text(
+                                    "Favourites",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        letterSpacing: .5),
-                                  ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      playlistname.deleteAt(ind);
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                  ],
+                ),
+                playlist.isEmpty
+                    ? Center(
+                        child: SizedBox(),
+                      )
+                    : ValueListenableBuilder(
+                        valueListenable: Hive.box('playlist').listenable(),
+                        builder: (context, Box playlistname, _) {
+                          List keys = playlistname.keys.toList();
+                          keys.remove("favourites");
+                          return (ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            itemCount: keys.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, ind) {
+                              return Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Container(
+                                  decoration: shadowFunction(),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PlaylistSongs(
+                                            audios: widget.audios,
+                                            title: keys[ind],
+                                          ),
+                                        ),
+                                      );
+                                      print("success");
                                     },
+                                    onLongPress: () {
+                                      editPlaylist(context, playlistname, ind);
+                                    },
+                                    title: Text(
+                                      keys[ind],
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: .5),
+                                    ),
+                                    trailing: IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        playlistname.deleteAt(ind);
+                                      },
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (_, index) => Divider(
-                            color: Colors.blueGrey[100],
-                          ),
-                        ));
-                      },
-                    )
-            ],
+                              );
+                            },
+                            separatorBuilder: (_, index) => Divider(
+                              color: Colors.blueGrey[100],
+                            ),
+                          ));
+                        },
+                      )
+              ],
+            ),
           ),
         ),
-        floatingActionButton: FloatingActionButton( 
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             openDialog();
             print("lib float");
@@ -202,23 +213,10 @@ class _LibraryState extends State<Library> {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-        // color: Colors.grey[200],
-        color: Color(0XFFEFF3F6),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.blueGrey,
-            offset: Offset(4.0, 4.0),
-            blurRadius: 15.0,
-            spreadRadius: 1.0,
-          ),
-          BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4.0, -4.0),
-            blurRadius: 6.0,
-            spreadRadius: 1.0,
-          )
-        ]);
+      color: Colors.black12,
+      // color: Color(0XFFEFF3F6),
+      borderRadius: BorderRadius.circular(10),
+    );
   }
 
 ///////////////////add to playlist/////////////////////////////
