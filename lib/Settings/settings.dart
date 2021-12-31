@@ -128,12 +128,7 @@ class Settings extends StatelessWidget {
                       alignment: Alignment.center,
                       decoration: shadowFunction(),
                       child: TextButton(
-                          onPressed: () {
-                            // showAboutDialog(
-                            //     context: context,
-                            //     applicationName: "Lullaby",
-                            //     children: [Text("")]);
-                          },
+                          onPressed: () {},
                           child: Text(
                             "Terms Of Service",
                             style: TextStyle(
@@ -151,12 +146,7 @@ class Settings extends StatelessWidget {
                       alignment: Alignment.center,
                       decoration: shadowFunction(),
                       child: TextButton(
-                          onPressed: () {
-                            // showAboutDialog(
-                            // context: context,
-                            // applicationName: "Lullaby",
-                            // children: [Text("")]);
-                          },
+                          onPressed: () {},
                           child: Text(
                             "Privacy Policy",
                             style: TextStyle(
@@ -226,7 +216,6 @@ class Settings extends StatelessWidget {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-      // color: Colors.grey[200],
       color: Colors.black12,
       borderRadius: BorderRadius.circular(10),
     );

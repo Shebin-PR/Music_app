@@ -7,15 +7,10 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 // ignore: must_be_immutable
 class Favourites extends StatelessWidget {
-   Favourites({
+  Favourites({
     Key? key,
   }) : super(key: key);
 
-//   @override
-//   _FavouritesState createState() => _FavouritesState();
-// }
-
-// class _FavouritesState extends State<Favourites> {
   List<Audio> music = [];
 
   @override
@@ -37,8 +32,7 @@ class Favourites extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
             child: ListView(
-                 physics: BouncingScrollPhysics(),
-              //  scrollDirection: Axis.vertical,
+              physics: BouncingScrollPhysics(),
               children: [
                 Container(
                   child: Row(
@@ -129,14 +123,6 @@ class Favourites extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              // trailing: PopupMenuButton(
-                              //   itemBuilder: (context) => [
-                              //     PopupMenuItem(
-                              //       child: Text("Remove"),
-                              //       value: 1,
-                              //     ),
-                              //   ],
-                              // ),
                               leading: QueryArtworkWidget(
                                 id: favourites[ind].id!,
                                 type: ArtworkType.AUDIO,
@@ -169,7 +155,6 @@ class Favourites extends StatelessWidget {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-      // color: Colors.grey[200],
       color: Colors.black12,
       borderRadius: BorderRadius.circular(10),
     );

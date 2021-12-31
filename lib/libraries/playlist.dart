@@ -16,16 +16,6 @@ class PlaylistSongs extends StatelessWidget {
   PlaylistSongs({Key? key, required this.title, required this.audios})
       : super(key: key);
 
-//   @override
-//   _PlaylistSongsState createState() => _PlaylistSongsState();
-// }
-
-// class _PlaylistSongsState extends State<PlaylistSongs> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   AssetsAudioPlayer get assetsAudioPlayer => AssetsAudioPlayer.withId('0');
 
   List<Audio> playAudio = [];
@@ -153,8 +143,7 @@ class PlaylistSongs extends StatelessWidget {
                                                 element.id.toString() ==
                                                 y[ind].id.toString(),
                                           );
-                                          // playlist.put(widget.name, y);
-                                          // setState(() {});
+
                                           _controller.update();
                                         },
                                       ),
@@ -201,27 +190,22 @@ class PlaylistSongs extends StatelessWidget {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-      // color: Colors.grey[200],
       color: Colors.black12,
       borderRadius: BorderRadius.circular(10),
     );
   }
 }
 
-class abc extends StatefulWidget {
+class abc extends StatelessWidget {
   abc({Key? key, required this.name}) : super(key: key);
   final String name;
-  @override
-  _abcState createState() => _abcState();
-}
 
-class _abcState extends State<abc> {
   @override
   Widget build(BuildContext context) {
     Box<List<AllSongs>> box = Boxes.getSongsDb();
     Box playlist = Hive.box('playlist');
     var k = box.get("music");
-    var y = playlist.get(widget.name);
+    var y = playlist.get(name);
 
     return Container(
       width: double.infinity,
@@ -235,67 +219,70 @@ class _abcState extends State<abc> {
             scrollDirection: Axis.vertical,
             itemCount: k!.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: shadowFunction(),
-                  child: ListTile(
-                    title: Text(
-                      k[index].title!,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w500),
-                    ),
-                    leading: QueryArtworkWidget(
-                      id: k[index].id!,
-                      type: ArtworkType.AUDIO,
-                      nullArtworkWidget: CircleAvatar(
-                        radius: 25,
-                        child: ClipOval(
-                          child: Image.asset(
-                            "assets/images/2.jpg",
-                            fit: BoxFit.cover,
-                            width: 50,
-                            height: 50,
+              return GetBuilder<StateController>(builder: (_controller) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: shadowFunction(),
+                    child: ListTile(
+                      title: Text(
+                        k[index].title!,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w500),
+                      ),
+                      leading: QueryArtworkWidget(
+                        id: k[index].id!,
+                        type: ArtworkType.AUDIO,
+                        nullArtworkWidget: CircleAvatar(
+                          radius: 25,
+                          child: ClipOval(
+                            child: Image.asset(
+                              "assets/images/2.jpg",
+                              fit: BoxFit.cover,
+                              width: 50,
+                              height: 50,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    trailing:
-                        y.where((element) => element.id == k[index].id).isEmpty
-                            ? IconButton(
-                                onPressed: () {
-                                  y.add(k[index]);
+                      trailing: y
+                              .where((element) => element.id == k[index].id)
+                              .isEmpty
+                          ? IconButton(
+                              onPressed: () {
+                                y.add(k[index]);
 
-                                  playlist.put(widget.name, y);
-                                  setState(() {});
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.blueGrey,
-                                  size: 30,
-                                ),
-                              )
-                            : IconButton(
-                                onPressed: () {
-                                  y.removeWhere(
-                                    (element) =>
-                                        element.id.toString() ==
-                                        k[index].id.toString(),
-                                  );
-                                  playlist.put(widget.name, y);
-                                  setState(() {});
-                                },
-                                icon: Icon(
-                                  Icons.minimize_outlined,
-                                  color: Colors.blueGrey,
-                                  size: 30,
-                                ),
+                                playlist.put(name, y);
+                                _controller.update();
+                              },
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.blueGrey,
+                                size: 30,
                               ),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                y.removeWhere(
+                                  (element) =>
+                                      element.id.toString() ==
+                                      k[index].id.toString(),
+                                );
+                                playlist.put(name, y);
+                                _controller.update();
+                              },
+                              icon: Icon(
+                                Icons.minimize_outlined,
+                                color: Colors.blueGrey,
+                                size: 30,
+                              ),
+                            ),
+                    ),
                   ),
-                ),
-              );
+                );
+              });
             },
           )
         ],
@@ -305,7 +292,6 @@ class _abcState extends State<abc> {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-        // color: Colors.grey[200],
         color: Color(0XFFEFF3F6),
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [

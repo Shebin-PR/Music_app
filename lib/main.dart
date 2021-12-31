@@ -1,4 +1,3 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/GetX/statecontroller.dart';
@@ -39,32 +38,6 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       debugShowCheckedModeBanner: false,
-      // home: const SplashScreen(),
     );
   }
 }
-
-
-// String hiveboxname = "songsfromdatabase";
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Hive.initFlutter();
-//   if (!Hive.isAdapterRegistered(AllSongsAdapter().typeId)) {
-//     Hive.registerAdapter(AllSongsAdapter());
-//   }
-//   await Hive.openBox<List<AllSongs>>(hiveboxname);
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(primaryColor: Colors.black),
-//       home: SplashScreen(),
-//     );
-//   }
-// }

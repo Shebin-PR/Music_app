@@ -8,11 +8,7 @@ import 'package:my_app/database/datamodel.dart';
 class BottomPopUp extends StatelessWidget {
   BottomPopUp({Key? key, required this.audio}) : super(key: key);
   final audio;
-//   @override
-//   _BottomPopUpState createState() => _BottomPopUpState();
-// }
 
-// class _BottomPopUpState extends State<BottomPopUp> {
   TextEditingController name = TextEditingController();
   Box playlist = Hive.box('playlist');
 
@@ -50,69 +46,72 @@ class BottomPopUp extends StatelessWidget {
                       itemBuilder: (context, ind) {
                         dynamic playlistSongs = box.get(playlistname[ind]);
                         return GetBuilder<StateController>(
-                            builder: (_controller) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Container(
-                              decoration: shadowFunction(),
-                              child: ListTile(
-                                onTap: () {},
-                                title: Text(
-                                  playlistname[ind],
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: .5),
+                          builder: (_controller) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: Container(
+                                decoration: shadowFunction(),
+                                child: ListTile(
+                                  onTap: () {},
+                                  title: Text(
+                                    playlistname[ind],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: .5),
+                                  ),
+                                  trailing: playlistSongs
+                                          .where((element) =>
+                                              element.id.toString() ==
+                                              audio.id.toString())
+                                          .isEmpty
+                                      ? IconButton(
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.blueGrey,
+                                            size: 30,
+                                          ),
+                                          onPressed: () async {
+                                            AllSongs a = AllSongs(
+                                                path: audio.uri,
+                                                id: audio.id,
+                                                title: audio.title,
+                                                duration: audio.duration,
+                                                artist: audio.artist);
+                                            playlistSongs.add(a);
+
+                                            await playlist.put(
+                                                playlistname[ind],
+                                                playlistSongs);
+
+                                            _controller.update();
+                                          },
+                                        )
+                                      : IconButton(
+                                          icon: Icon(
+                                            Icons.minimize,
+                                            color: Colors.blueGrey,
+                                            size: 30,
+                                          ),
+                                          onPressed: () {
+                                            playlistSongs.removeWhere(
+                                              (element) =>
+                                                  element.id.toString() ==
+                                                  audio.id.toString(),
+                                            );
+                                            box.put(playlistname[ind],
+                                                playlistSongs);
+
+                                            // setState(() {});
+                                          },
+                                        ),
                                 ),
-                                trailing: playlistSongs
-                                        .where((element) =>
-                                            element.id.toString() ==
-                                            audio.id.toString())
-                                        .isEmpty
-                                    ? IconButton(
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: Colors.blueGrey,
-                                          size: 30,
-                                        ),
-                                        onPressed: () async {
-                                          AllSongs a = AllSongs(
-                                              path: audio.uri,
-                                              id: audio.id,
-                                              title: audio.title,
-                                              duration: audio.duration,
-                                              artist: audio.artist);
-                                          playlistSongs.add(a);
-
-                                          await playlist.put(
-                                              playlistname[ind], playlistSongs);
-
-                                          _controller.update();
-                                        },
-                                      )
-                                    : IconButton(
-                                        icon: Icon(
-                                          Icons.minimize,
-                                          color: Colors.blueGrey,
-                                          size: 30,
-                                        ),
-                                        onPressed: () {
-                                          playlistSongs.removeWhere(
-                                            (element) =>
-                                                element.id.toString() ==
-                                                audio.id.toString(),
-                                          );
-                                          box.put(
-                                              playlistname[ind], playlistSongs);
-
-                                          // setState(() {});
-                                        },
-                                      ),
                               ),
-                            ),
-                          );
-                        });
+                            );
+                          },
+                        );
                       },
                       separatorBuilder: (_, index) => Divider(
                         color: Colors.white,
@@ -127,7 +126,6 @@ class BottomPopUp extends StatelessWidget {
 
   BoxDecoration shadowFunction() {
     return BoxDecoration(
-        // color: Colors.grey[200],
         color: Color(0XFFEFF3F6),
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
@@ -206,7 +204,6 @@ class BottomPopUp extends StatelessWidget {
                           );
                     _controller.update();
                     Navigator.pop(context, 'OK');
-                    // name.clear();
                   }
                 },
               )

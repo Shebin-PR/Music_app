@@ -4,11 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OpenAssetAudio {
   final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
-  // List<Audio> allaudios;
-  // int index;
-  bool? isSwitched;
 
-  // OpenAssetAudio({required this.allaudios, required this.index});
+  bool? isSwitched;
 
   Future<bool?> setSwitchedValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -16,10 +13,7 @@ class OpenAssetAudio {
     return isSwitched;
   }
 
-  openAsset(
-      // int ind, List<Audio> audio,
-      {List<Audio>? audios,
-      required int index}) async {
+  openAsset({List<Audio>? audios, required int index}) async {
     isSwitched = await setSwitchedValue();
     audioPlayer.open(
       Playlist(audios: audios, startIndex: index),

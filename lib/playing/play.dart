@@ -15,11 +15,6 @@ class PlayScreen extends StatelessWidget {
     this.audio = const [],
   }) : super(key: key);
 
-//   @override
-//   _PlayScreenState createState() => _PlayScreenState();
-// }
-
-// class _PlayScreenState extends State<PlayScreen> {
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
   Audio find(List<Audio> source, String fromPath) {
     return source.firstWhere((element) => element.path == fromPath);
@@ -34,8 +29,7 @@ class PlayScreen extends StatelessWidget {
             backgroundColor: Colors.blueGrey[200],
             body: assetsAudioPlayer.builderCurrent(
                 builder: (context, Playing? playing) {
-              final myAudios =
-                  find(songs, playing!.audio.assetAudioPath);
+              final myAudios = find(songs, playing!.audio.assetAudioPath);
               return Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
@@ -249,10 +243,9 @@ class PlayScreen extends StatelessWidget {
                             child: IconButton(
                                 onPressed: () {
                                   if (audio.isNotEmpty) {
-                                    var ply = audio.firstWhere(
-                                        (element) =>
-                                            element.id.toString() ==
-                                            myAudios.metas.id.toString());
+                                    var ply = audio.firstWhere((element) =>
+                                        element.id.toString() ==
+                                        myAudios.metas.id.toString());
 
                                     showModalBottomSheet(
                                         context: context,
@@ -265,14 +258,6 @@ class PlayScreen extends StatelessWidget {
                                   color: Colors.black,
                                 )),
                           ),
-
-                          /////////////////////////////favourites////////////////////////
-                          // Container(
-                          //   height: 55,
-                          //   width: 55,
-                          //   decoration: imageshadowss(),
-                          //   child: FavouritesIcon(myAudios: myAudios),
-                          // ),
                         ],
                       ),
                     ],

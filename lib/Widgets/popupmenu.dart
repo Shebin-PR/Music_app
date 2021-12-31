@@ -11,11 +11,6 @@ class PopUpPlayFav extends StatelessWidget {
   PopUpPlayFav({Key? key, required this.audio}) : super(key: key);
   SongModel audio;
 
-//   @override
-//   _PopUpPlayFavState createState() => _PopUpPlayFavState();
-// }
-
-// class _PopUpPlayFavState extends State<PopUpPlayFav> {
   Box fav = Boxes.getSongsDb();
   @override
   Widget build(BuildContext context) {
@@ -23,8 +18,8 @@ class PopUpPlayFav extends StatelessWidget {
     Box box = Hive.box('playlist');
     List favourites = box.get("favourites");
 
-    final temp = OpenAssetAudio()
-        .findSongFromDatabase(songs, audio.id.toString());
+    final temp =
+        OpenAssetAudio().findSongFromDatabase(songs, audio.id.toString());
 
     return PopupMenuButton(
       itemBuilder: (context) => [

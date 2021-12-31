@@ -13,11 +13,6 @@ class Library extends StatelessWidget {
 
   Library({Key? key, required this.audios}) : super(key: key);
 
-//   @override
-//   _LibraryState createState() => _LibraryState();
-// }
-
-// class _LibraryState extends State<Library> {
   TextEditingController name = TextEditingController();
   String? title;
   Box playlist = Hive.box('playlist');
