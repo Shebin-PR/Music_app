@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/database/local.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StateController extends GetxController {
   @override
@@ -49,6 +50,26 @@ class StateController extends GetxController {
               artist: element.artist)));
     });
     update();
+  }
+
+  bool isSwitched = true;
+
+  getSwitchValues() async {
+    isSwitched = await getSwitchState();
+    update();
+  }
+
+  Future<bool> saveSwitchState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("toggleSwitch", value);
+    return prefs.setBool("toggleSwitch", value);
+  }
+
+  Future<bool> getSwitchState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isSwitched = await prefs.getBool("toggleSwitch");
+
+    return isSwitched != null ? isSwitched : true;
   }
 }
 

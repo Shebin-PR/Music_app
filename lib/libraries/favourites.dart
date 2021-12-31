@@ -5,16 +5,17 @@ import 'package:my_app/playing/openassetaudio.dart';
 import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class Favourites extends StatefulWidget {
-  const Favourites({
+// ignore: must_be_immutable
+class Favourites extends StatelessWidget {
+   Favourites({
     Key? key,
   }) : super(key: key);
 
-  @override
-  _FavouritesState createState() => _FavouritesState();
-}
+//   @override
+//   _FavouritesState createState() => _FavouritesState();
+// }
 
-class _FavouritesState extends State<Favourites> {
+// class _FavouritesState extends State<Favourites> {
   List<Audio> music = [];
 
   @override

@@ -1,27 +1,30 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_app/GetX/statecontroller.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/database/local.dart';
 import 'package:my_app/playing/openassetaudio.dart';
 import 'package:my_app/playing/play.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class PlaylistSongs extends StatefulWidget {
+// ignore: must_be_immutable
+class PlaylistSongs extends StatelessWidget {
   final List<dynamic> audios;
   final String title;
   PlaylistSongs({Key? key, required this.title, required this.audios})
       : super(key: key);
 
-  @override
-  _PlaylistSongsState createState() => _PlaylistSongsState();
-}
+//   @override
+//   _PlaylistSongsState createState() => _PlaylistSongsState();
+// }
 
-class _PlaylistSongsState extends State<PlaylistSongs> {
-  @override
-  void initState() {
-    super.initState();
-  }
+// class _PlaylistSongsState extends State<PlaylistSongs> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   AssetsAudioPlayer get assetsAudioPlayer => AssetsAudioPlayer.withId('0');
 
@@ -57,7 +60,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                       child: Container(
                         alignment: Alignment.center,
                         child: Text(
-                          widget.title,
+                          title,
                           style: TextStyle(
                               shadows: [
                                 Shadow(
@@ -94,7 +97,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                 ValueListenableBuilder(
                   valueListenable: Hive.box('playlist').listenable(),
                   builder: (BuildContext context, Box play, _) {
-                    List y = play.get(widget.title);
+                    List y = play.get(title);
                     y.forEach((element) {
                       playAudio.add(Audio.file(element.path,
                           metas: Metas(
@@ -107,73 +110,77 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                       shrinkWrap: true,
                       itemCount: y.length,
                       itemBuilder: (ctx, ind) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: Container(
-                            decoration: shadowFunction(),
-                            child: ListTile(
-                              onTap: () {
-                                OpenAssetAudio()
-                                    .openAsset(index: ind, audios: playAudio);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PlayScreen(
-                                            songs: playAudio,
-                                          )),
-                                );
-                              },
-                              title: Text(
-                                y[ind].title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              subtitle: Text(
-                                y[ind].artist ?? "No Artist",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: PopupMenuButton(
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    child: TextButton(
-                                      child: Text("Remove"),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        y.removeWhere(
-                                          (element) =>
-                                              element.id.toString() ==
-                                              y[ind].id.toString(),
-                                        );
-                                        // playlist.put(widget.name, y);
-                                        setState(() {});
-                                      },
+                        return GetBuilder<StateController>(
+                            builder: (_controller) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: Container(
+                              decoration: shadowFunction(),
+                              child: ListTile(
+                                onTap: () {
+                                  OpenAssetAudio()
+                                      .openAsset(index: ind, audios: playAudio);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PlayScreen(
+                                              songs: playAudio,
+                                            )),
+                                  );
+                                },
+                                title: Text(
+                                  y[ind].title,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                subtitle: Text(
+                                  y[ind].artist ?? "No Artist",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: PopupMenuButton(
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      child: TextButton(
+                                        child: Text("Remove"),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          y.removeWhere(
+                                            (element) =>
+                                                element.id.toString() ==
+                                                y[ind].id.toString(),
+                                          );
+                                          // playlist.put(widget.name, y);
+                                          // setState(() {});
+                                          _controller.update();
+                                        },
+                                      ),
+                                      value: 1,
                                     ),
-                                    value: 1,
-                                  ),
-                                ],
-                              ),
-                              leading: QueryArtworkWidget(
-                                id: y[ind].id,
-                                type: ArtworkType.AUDIO,
-                                nullArtworkWidget: CircleAvatar(
-                                  radius: 25,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/2.jpg",
-                                      fit: BoxFit.cover,
-                                      width: 50,
-                                      height: 50,
+                                  ],
+                                ),
+                                leading: QueryArtworkWidget(
+                                  id: y[ind].id,
+                                  type: ArtworkType.AUDIO,
+                                  nullArtworkWidget: CircleAvatar(
+                                    radius: 25,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        "assets/images/2.jpg",
+                                        fit: BoxFit.cover,
+                                        width: 50,
+                                        height: 50,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        });
                       },
                     );
                   },
@@ -184,7 +191,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => abc(name: widget.title));
+              context: context, builder: (context) => abc(name: title));
         },
         backgroundColor: Colors.black,
         child: const Icon(Icons.add),

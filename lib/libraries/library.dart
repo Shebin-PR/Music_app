@@ -1,25 +1,23 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_app/GetX/statecontroller.dart';
 import 'package:my_app/libraries/favourites.dart';
 import 'package:my_app/libraries/playlist.dart';
 
-class Library extends StatefulWidget {
+// ignore: must_be_immutable
+class Library extends StatelessWidget {
   final List<dynamic> audios;
 
   Library({Key? key, required this.audios}) : super(key: key);
 
-  @override
-  _LibraryState createState() => _LibraryState();
-}
+//   @override
+//   _LibraryState createState() => _LibraryState();
+// }
 
-class _LibraryState extends State<Library> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+// class _LibraryState extends State<Library> {
   TextEditingController name = TextEditingController();
   String? title;
   Box playlist = Hive.box('playlist');
@@ -157,7 +155,7 @@ class _LibraryState extends State<Library> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => PlaylistSongs(
-                                            audios: widget.audios,
+                                            audios: audios,
                                             title: keys[ind],
                                           ),
                                         ),
@@ -200,7 +198,7 @@ class _LibraryState extends State<Library> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            openDialog();
+            openDialog(context);
             print("lib float");
           },
           backgroundColor: Colors.black,
@@ -219,109 +217,47 @@ class _LibraryState extends State<Library> {
   }
 
 ///////////////////add to playlist/////////////////////////////
-  Future openDialog() => showDialog(
-      context: context,
+  Future openDialog(context) => showDialog(
+      context: (context),
       builder: (context) {
         List<dynamic> samplelist = [];
-        return AlertDialog(
-          title: const Text(
-            "Create New Playlist",
-            style: TextStyle(
-                letterSpacing: 1,
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-          ),
-          content: TextField(
-            controller: name,
-            cursorColor: Colors.white,
-            style: const TextStyle(
-                color: Colors.grey, fontSize: 20, letterSpacing: 1),
-            decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                fillColor: Colors.black,
-                filled: true,
-                hintText: "Playlist Name",
-                hintStyle: TextStyle(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: 1)),
-          ),
-          actions: [
-            TextButton(
-              child: const Text(
-                "CREATE",
-                style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              onPressed: () async {
-                var z = playlist.keys.toList();
-                if (name != null) {
-                  title = name.text;
-                  z.where((element) => element == title).isEmpty
-                      ? title!.isNotEmpty
-                          ? playlist.put(
-                              title,
-                              samplelist,
-                            )
-                          : playlist
-                      : ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text('Playlist already exist'),
-                            duration: const Duration(seconds: 1),
-                          ),
-                        );
-
-                  setState(() {});
-                  Navigator.pop(context);
-                  // name.clear();
-                }
-              },
-            )
-          ],
-        );
-      });
-
-///////////////////edit playlist//////////////////////
-  Future<String?> editPlaylist(
-      BuildContext context, Box<dynamic> playlistname, int ind) {
-    return showDialog<String>(
-        context: context,
-        builder: (BuildContext context) {
+        return GetBuilder<StateController>(builder: (_controller) {
           return AlertDialog(
-            backgroundColor: Colors.white,
             title: const Text(
-              "Edit Playlist",
+              "Create New Playlist",
               style: TextStyle(
                   letterSpacing: 1,
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
+            content: TextField(
+              controller: name,
+              cursorColor: Colors.white,
+              style: const TextStyle(
+                  color: Colors.grey, fontSize: 20, letterSpacing: 1),
+              decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)),
+                  fillColor: Colors.black,
+                  filled: true,
+                  hintText: "Playlist Name",
+                  hintStyle: TextStyle(
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: 1)),
+            ),
             actions: [
-              TextField(
-                controller: name,
-                cursorColor: Colors.white,
-                style: const TextStyle(
-                    color: Colors.grey, fontSize: 20, letterSpacing: 1),
-                decoration: InputDecoration(
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                    fillColor: Colors.black,
-                    filled: true,
-                    hintText: playlistname.keyAt(ind),
-                    hintStyle: TextStyle(
-                        color: Colors.grey[600],
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 1)),
-              ),
               TextButton(
+                child: const Text(
+                  "CREATE",
+                  style: TextStyle(
+                      letterSpacing: 1,
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () async {
-                  var y = playlist.get(playlistname.keyAt(ind));
                   var z = playlist.keys.toList();
                   if (name != null) {
                     title = name.text;
@@ -329,7 +265,7 @@ class _LibraryState extends State<Library> {
                         ? title!.isNotEmpty
                             ? playlist.put(
                                 title,
-                                y,
+                                samplelist,
                               )
                             : playlist
                         : ScaffoldMessenger.of(context).showSnackBar(
@@ -339,29 +275,95 @@ class _LibraryState extends State<Library> {
                             ),
                           );
 
-                    z.where((element) => element == title).isEmpty
-                        ? title!.isNotEmpty
-                            ? playlist.delete(
-                                playlistname.keyAt(ind),
-                              )
-                            : playlist
-                        : playlist;
+                    _controller.update();
+                    Navigator.pop(context);
+                    // name.clear();
                   }
-                  setState(() {});
-                  Navigator.pop(context);
-                  // name.clear();
                 },
-                child: const Text(
-                  "Save",
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              )
             ],
           );
+        });
+      });
+
+///////////////////edit playlist//////////////////////
+  Future<String?> editPlaylist(
+      BuildContext context, Box<dynamic> playlistname, int ind) {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return GetBuilder<StateController>(builder: (_controller) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              title: const Text(
+                "Edit Playlist",
+                style: TextStyle(
+                    letterSpacing: 1,
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              actions: [
+                TextField(
+                  controller: name,
+                  cursorColor: Colors.white,
+                  style: const TextStyle(
+                      color: Colors.grey, fontSize: 20, letterSpacing: 1),
+                  decoration: InputDecoration(
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      fillColor: Colors.black,
+                      filled: true,
+                      hintText: playlistname.keyAt(ind),
+                      hintStyle: TextStyle(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.normal,
+                          letterSpacing: 1)),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    var y = playlist.get(playlistname.keyAt(ind));
+                    var z = playlist.keys.toList();
+                    if (name != null) {
+                      title = name.text;
+                      z.where((element) => element == title).isEmpty
+                          ? title!.isNotEmpty
+                              ? playlist.put(
+                                  title,
+                                  y,
+                                )
+                              : playlist
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Playlist already exist'),
+                                duration: const Duration(seconds: 1),
+                              ),
+                            );
+
+                      z.where((element) => element == title).isEmpty
+                          ? title!.isNotEmpty
+                              ? playlist.delete(
+                                  playlistname.keyAt(ind),
+                                )
+                              : playlist
+                          : playlist;
+                    }
+                    _controller.update();
+                    Navigator.pop(context);
+                    // name.clear();
+                  },
+                  child: const Text(
+                    "Save",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            );
+          });
         });
   }
 }

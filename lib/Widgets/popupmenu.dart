@@ -7,15 +7,15 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'bottommodel.dart';
 
 // ignore: must_be_immutable
-class PopUpPlayFav extends StatefulWidget {
+class PopUpPlayFav extends StatelessWidget {
   PopUpPlayFav({Key? key, required this.audio}) : super(key: key);
   SongModel audio;
 
-  @override
-  _PopUpPlayFavState createState() => _PopUpPlayFavState();
-}
+//   @override
+//   _PopUpPlayFavState createState() => _PopUpPlayFavState();
+// }
 
-class _PopUpPlayFavState extends State<PopUpPlayFav> {
+// class _PopUpPlayFavState extends State<PopUpPlayFav> {
   Box fav = Boxes.getSongsDb();
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
     List favourites = box.get("favourites");
 
     final temp = OpenAssetAudio()
-        .findSongFromDatabase(songs, widget.audio.id.toString());
+        .findSongFromDatabase(songs, audio.id.toString());
 
     return PopupMenuButton(
       itemBuilder: (context) => [
@@ -65,7 +65,7 @@ class _PopUpPlayFavState extends State<PopUpPlayFav> {
         if (value == "2") {
           showModalBottomSheet(
               context: context,
-              builder: (context) => BottomPopUp(audio: widget.audio));
+              builder: (context) => BottomPopUp(audio: audio));
         }
       },
     );

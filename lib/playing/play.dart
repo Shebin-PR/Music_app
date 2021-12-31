@@ -6,7 +6,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import '../libraries/library.dart';
 
 // ignore: must_be_immutable
-class PlayScreen extends StatefulWidget {
+class PlayScreen extends StatelessWidget {
   var songs;
   final List<SongModel> audio;
   PlayScreen({
@@ -15,11 +15,11 @@ class PlayScreen extends StatefulWidget {
     this.audio = const [],
   }) : super(key: key);
 
-  @override
-  _PlayScreenState createState() => _PlayScreenState();
-}
+//   @override
+//   _PlayScreenState createState() => _PlayScreenState();
+// }
 
-class _PlayScreenState extends State<PlayScreen> {
+// class _PlayScreenState extends State<PlayScreen> {
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
   Audio find(List<Audio> source, String fromPath) {
     return source.firstWhere((element) => element.path == fromPath);
@@ -35,7 +35,7 @@ class _PlayScreenState extends State<PlayScreen> {
             body: assetsAudioPlayer.builderCurrent(
                 builder: (context, Playing? playing) {
               final myAudios =
-                  find(widget.songs, playing!.audio.assetAudioPath);
+                  find(songs, playing!.audio.assetAudioPath);
               return Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
@@ -248,8 +248,8 @@ class _PlayScreenState extends State<PlayScreen> {
                             decoration: imageshadowss(),
                             child: IconButton(
                                 onPressed: () {
-                                  if (widget.audio.isNotEmpty) {
-                                    var ply = widget.audio.firstWhere(
+                                  if (audio.isNotEmpty) {
+                                    var ply = audio.firstWhere(
                                         (element) =>
                                             element.id.toString() ==
                                             myAudios.metas.id.toString());

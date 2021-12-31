@@ -79,7 +79,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(body: GetBuilder<StateController>(builder: (_controller) {
+      child: Scaffold(
+        body: GetBuilder<StateController>(builder: (_controller) {
         if (searchtext.isEmpty) {
           results = _controller.songs.toList();
         }
