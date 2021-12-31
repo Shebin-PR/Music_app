@@ -26,52 +26,7 @@ class HomeScreen extends StatelessWidget {
   final OnAudioQuery audioQuery = OnAudioQuery();
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   requestPermission();
-  // }
-
-  // requestPermission() async {
-  //   bool permissionStatus = await audioQuery.permissionsStatus();
-  //   if (!permissionStatus) {
-  //     await audioQuery.permissionsRequest();
-  //     Box fav = Hive.box('playlist');
-  //     List favourites = [];
-  //     await fav.put("favourites", favourites);
-  //   }
-
-  //   songs = await audioQuery.querySongs();
-  //   Datasongs = songs
-  //       .map((e) => AllSongs(
-  //             path: e.uri!,
-  //             id: e.id,
-  //             title: e.title,
-  //             duration: e.duration,
-  //             artist: e.artist,
-  //           ))
-  //       .toList();
-
-  //   await box.put("music", Datasongs);
-  //   db = box.get('music');
-  //   db!.forEach((element) {
-  //     allaudios.add(Audio.file(element.path,
-  //         metas: Metas(
-  //             title: element.title,
-  //             id: element.id.toString(),
-  //             artist: element.artist)));
-  //   });
-  //   setState(() {});
-  // }
-
-  // List<SongModel> songs = [];
-  // List<AllSongs> Datasongs = [];
-  // List<AllSongs>? db = [];
-  // Box<List<AllSongs>> box = Boxes.getSongsDb();
-  // List<Audio> allaudios = [];
-
   TextEditingController name = TextEditingController();
-  // Box playlist = Hive.box('playlist');
 
   String searchtext = "";
   List<SongModel>? results;
@@ -79,8 +34,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: GetBuilder<StateController>(builder: (_controller) {
+      child: Scaffold(body: GetBuilder<StateController>(builder: (_controller) {
         if (searchtext.isEmpty) {
           results = _controller.songs.toList();
         }

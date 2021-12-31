@@ -5,37 +5,6 @@ import 'package:my_app/GetX/statecontroller.dart';
 class Settings extends StatelessWidget {
   Settings({Key? key}) : super(key: key);
 
-//   @override
-//   State<Settings> createState() => _SettingsState();
-// }
-
-// class _SettingsState extends State<Settings> {
-  // bool isSwitched = true;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getSwitchValues();
-  // }
-
-  // getSwitchValues() async {
-  //   isSwitched = await getSwitchState();
-  //   // setState(() {});
-  // }
-
-  // Future<bool> saveSwitchState(bool value) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool("toggleSwitch", value);
-  //   return prefs.setBool("toggleSwitch", value);
-  // }
-
-  // Future<bool> getSwitchState() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   bool? isSwitched = await prefs.getBool("toggleSwitch");
-
-  //   return isSwitched != null ? isSwitched : true;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
