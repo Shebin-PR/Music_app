@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_app/homescreen.dart';
 
@@ -15,10 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // ignore: todo
     // TODO: implement initState
     Future.delayed(Duration(seconds: 4), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      Get.offNamed("/home");
     });
     super.initState();
   }
@@ -29,13 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.black,
       body: Container(
         alignment: Alignment.center,
+        // height: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 650,
-              width: 500,
+              // height: 650,
+              // width: 500,
               child: Lottie.asset("assets/images/splashback.json"),
             ),
             Text(

@@ -36,7 +36,7 @@ class _FavouritesState extends State<Favourites> {
           child: Padding(
             padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
             child: ListView(
-              //    physics: BouncingScrollPhysics(),
+                 physics: BouncingScrollPhysics(),
               //  scrollDirection: Axis.vertical,
               children: [
                 Container(

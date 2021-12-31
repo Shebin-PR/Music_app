@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -259,20 +258,6 @@ class _SettingsState extends State<Settings> {
       // color: Colors.grey[200],
       color: Colors.black12,
       borderRadius: BorderRadius.circular(10),
-      // boxShadow: const [
-      //   BoxShadow(
-      //     color: Colors.blueGrey,
-      //     offset: Offset(4.0, 4.0),
-      //     blurRadius: 15.0,
-      //     spreadRadius: 1.0,
-      //   ),
-      //   BoxShadow(
-      //     color: Colors.white,
-      //     offset: Offset(-4.0, -4.0),
-      //     blurRadius: 6.0,
-      //     spreadRadius: 1.0,
-      //   )
-      // ]
     );
   }
 }

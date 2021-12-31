@@ -1,11 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:my_app/Widgets/bottommodel.dart';
-import 'package:my_app/Widgets/favouritesicon.dart';
-import 'package:my_app/database/datamodel.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import '../libraries/library.dart';
 
@@ -41,6 +37,7 @@ class _PlayScreenState extends State<PlayScreen> {
               final myAudios =
                   find(widget.songs, playing!.audio.assetAudioPath);
               return Container(
+                height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -152,7 +149,7 @@ class _PlayScreenState extends State<PlayScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
 
                       /////////////////////////////artist/////////////////////////////////////////////////////////////////////////////
                       Text(
@@ -239,7 +236,7 @@ class _PlayScreenState extends State<PlayScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 20),
 
                       /////////////////playlist- favourites//////////////////////////////////
                       Row(

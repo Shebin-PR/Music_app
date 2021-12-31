@@ -5,4 +5,5 @@ import 'datamodel.dart';
 class Boxes {
   static Box<List<AllSongs>> getSongsDb() =>
   Hive.box<List<AllSongs>>("songdata");
+  // Hive.box<List<AllSongs>>(hiveboxname);
 }

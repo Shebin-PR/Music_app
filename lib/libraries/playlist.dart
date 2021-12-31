@@ -1,6 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/database/datamodel.dart';
 import 'package:my_app/database/local.dart';
@@ -104,6 +103,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                               artist: element.artist)));
                     });
                     return ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: y.length,
                       itemBuilder: (ctx, ind) {
