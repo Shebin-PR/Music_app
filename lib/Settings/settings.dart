@@ -122,39 +122,11 @@ class Settings extends StatelessWidget {
                     const SizedBox(height: 15),
 
                     /////////////////////////terms of service/////////////////////////////////////
-                    Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.center,
-                      decoration: shadowFunction(),
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Terms Of Service",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal),
-                          )),
-                    ),
+                    allsettings("Terms of service"),
                     const SizedBox(height: 15),
 
                     //////////////////////privacy policy/////////////////////////////////////////
-                    Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.center,
-                      decoration: shadowFunction(),
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Privacy Policy",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal),
-                          )),
-                    ),
+                    allsettings("Privacy Policy"),
                     const SizedBox(height: 15),
 
                     /////////////////////////about//////////////////////////////////////
@@ -196,10 +168,10 @@ class Settings extends StatelessWidget {
                             showAboutDialog(
                                 context: context,
                                 applicationName: "Lullaby",
-                                children: [Text("Version : 1.0.1")]);
+                                children: [Text("Version : 2.0.0")]);
                           },
                           child: Text(
-                            "Version 1.0.1",
+                            "Version 2.0.0",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -211,6 +183,24 @@ class Settings extends StatelessWidget {
               ),
             );
           })),
+    );
+  }
+
+  Container allsettings(String text) {
+    return Container(
+      height: 50,
+      width: 150,
+      alignment: Alignment.center,
+      decoration: shadowFunction(),
+      child: TextButton(
+          onPressed: () {},
+          child: Text(
+            text,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.normal),
+          )),
     );
   }
 

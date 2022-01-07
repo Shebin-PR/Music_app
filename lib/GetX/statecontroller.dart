@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -42,7 +44,11 @@ class StateController extends GetxController {
 
     await box.put("music", Datasongs);
     db = box.get('music');
-    db!.forEach((element) {
+    db!.forEach((element) async {
+      if (!await File(element.path).exists()) {
+        return;
+      }
+
       allaudios.add(Audio.file(element.path,
           metas: Metas(
               title: element.title,

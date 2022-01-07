@@ -7,7 +7,7 @@ import '../libraries/library.dart';
 
 // ignore: must_be_immutable
 class PlayScreen extends StatelessWidget {
-  var songs;
+  List<Audio> songs;
   final List<SongModel> audio;
   PlayScreen({
     Key? key,

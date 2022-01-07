@@ -13,6 +13,7 @@ class Favourites extends StatelessWidget {
 
   List<Audio> music = [];
 
+  final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -99,7 +100,8 @@ class Favourites extends StatelessWidget {
                           child: Container(
                             decoration: shadowFunction(),
                             child: ListTile(
-                              onTap: () {
+                              onTap: () async {
+                                await assetsAudioPlayer.stop();
                                 OpenAssetAudio()
                                     .openAsset(index: ind, audios: music);
                                 Navigator.push(

@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
     return source.firstWhere((element) => element.path == fromPath);
   }
 
+  List<Audio> audioSongs = [];
   final OnAudioQuery audioQuery = OnAudioQuery();
   final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
 
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         if (searchtext.isEmpty) {
           results = _controller.songs.toList();
         }
-        return _controller.allaudios.isNotEmpty
+        return _controller.songs.isNotEmpty
             ? Container(
                 child: Stack(
                   children: [
@@ -212,7 +213,7 @@ class HomeScreen extends StatelessWidget {
                                   scrollDirection: Axis.vertical,
                                   itemCount: results!.length,
                                   itemBuilder: (context, index) {
-                                    List<Audio> audioSongs = results!
+                                    audioSongs = results!
                                         .map((element) => Audio.file(
                                             element.uri!,
                                             metas: Metas(
@@ -221,16 +222,16 @@ class HomeScreen extends StatelessWidget {
                                                 artist: element.artist)))
                                         .toList();
                                     return GestureDetector(
-                                      onTap: () {
+                                      onTap: ()  {
+                                        // await assetsAudioPlayer.stop();
                                         OpenAssetAudio().openAsset(
                                             index: index, audios: audioSongs);
-
+                                        print(_controller.songs.length);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => PlayScreen(
-                                                    songs:
-                                                        _controller.allaudios,
+                                                    songs: audioSongs,
                                                     audio: _controller.songs,
                                                   )),
                                         );
@@ -286,8 +287,8 @@ class HomeScreen extends StatelessWidget {
                     ///////////////////////// Bottom Recent Song/////////////////////////////////////////////////////////////////
                     assetsAudioPlayer.builderCurrent(
                         builder: (context, Playing? playing) {
-                      final myAudios = find(
-                          _controller.allaudios, playing!.audio.assetAudioPath);
+                      final myAudios =
+                          find(audioSongs, playing!.audio.assetAudioPath);
                       return Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
@@ -303,7 +304,7 @@ class HomeScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PlayScreen(
-                                              songs: _controller.allaudios,
+                                              songs: audioSongs,
                                             )));
                               },
                               title: Text(
@@ -382,7 +383,11 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : Text("SDFGHJK");
+            : Center(
+                child: Text(
+                "No Songs found",
+                style: TextStyle(color: Colors.black, fontSize: 25),
+              ));
       })),
     );
   }

@@ -107,7 +107,8 @@ class PlaylistSongs extends StatelessWidget {
                             child: Container(
                               decoration: shadowFunction(),
                               child: ListTile(
-                                onTap: () {
+                                onTap: () async {
+                                  await assetsAudioPlayer.stop();
                                   OpenAssetAudio()
                                       .openAsset(index: ind, audios: playAudio);
                                   Navigator.push(
@@ -137,13 +138,12 @@ class PlaylistSongs extends StatelessWidget {
                                       child: TextButton(
                                         child: Text("Remove"),
                                         onPressed: () {
-                                          Navigator.pop(context);
                                           y.removeWhere(
                                             (element) =>
                                                 element.id.toString() ==
                                                 y[ind].id.toString(),
                                           );
-
+                                          Navigator.pop(context);
                                           _controller.update();
                                         },
                                       ),
