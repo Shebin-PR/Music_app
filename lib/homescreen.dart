@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                               subtitle: Text(
                                 myAudios.metas.artist ?? "No Artist",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.black45,
                                     fontWeight: FontWeight.bold),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -382,11 +382,14 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : Center(
-                child: Text(
-                "No Songs found",
-                style: TextStyle(color: Colors.black, fontSize: 25),
-              ));
+            : Container(
+                color: Colors.black,
+                child: Center(
+                    child: Text(
+                  "No Songs found",
+                  style: TextStyle(color: Colors.grey, fontSize: 25),
+                )),
+              );
       })),
     );
   }
@@ -401,12 +404,6 @@ class HomeScreen extends StatelessWidget {
             Color(0xffE4E5E6),
             Color(0xff00416A),
             Color(0xff928DAB),
-            // Color(0xffE4E5E6),
-            // Color(0xff00416A),
-            // Color(0xff928DAB),
-            // Color(0xffE4E5E6),
-            // Color(0xff00416A),
-            // Color(0xff928DAB),
           ],
         ),
         borderRadius: BorderRadius.circular(10),
