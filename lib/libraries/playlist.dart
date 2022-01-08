@@ -148,8 +148,18 @@ class PlaylistSongs extends StatelessWidget {
                                         },
                                       ),
                                       value: 1,
+                                      // child: Text("Remove",
+                                      //     style: TextStyle(
+                                      //         fontSize: 15)),
                                     ),
                                   ],
+                                  // onSelected: (value) {
+                                  //   if (value == "1") {
+                                  //     y.removeAt(ind);
+                                  //     _controller.update();
+                                  //   }
+                                  //   ;
+                                  // }
                                 ),
                                 leading: QueryArtworkWidget(
                                   id: y[ind].id,
