@@ -180,7 +180,7 @@ class PlaylistSongs extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => abc(name: title));
+              context: context, builder: (context) => bottomSheet(name: title));
         },
         backgroundColor: Colors.black,
         child: const Icon(Icons.add),
@@ -196,8 +196,8 @@ class PlaylistSongs extends StatelessWidget {
   }
 }
 
-class abc extends StatelessWidget {
-  abc({Key? key, required this.name}) : super(key: key);
+class bottomSheet extends StatelessWidget {
+  bottomSheet({Key? key, required this.name}) : super(key: key);
   final String name;
 
   @override
