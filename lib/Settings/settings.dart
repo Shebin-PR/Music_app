@@ -113,8 +113,8 @@ class Settings extends StatelessWidget {
                                 ));
                               }
                             },
-                            inactiveTrackColor: Colors.grey,
-                            activeTrackColor: Colors.red,
+                            inactiveTrackColor: Colors.black12,
+                            activeTrackColor: Colors.black54,
                           ),
                         ],
                       ),
@@ -158,26 +158,36 @@ class Settings extends StatelessWidget {
                     const SizedBox(height: 15),
 
                     //////////////////////version////////////////////////////////////////
-                    Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.center,
-                      decoration: shadowFunction(),
-                      child: TextButton(
-                          onPressed: () {
-                            showAboutDialog(
-                                context: context,
-                                applicationName: "Lullaby",
-                                children: [Text("Version : 2.0.0")]);
-                          },
-                          child: Text(
-                            "Version 2.0.0",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal),
-                          )),
-                    ),
+                    ///
+                    ///
+
+                    Center(
+                      heightFactor: 25,
+                      child: Text(
+                        "Version 2.0.0",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
+                    // Container(
+                    //   height: 50,
+                    //   width: 150,
+                    //   alignment: Alignment.center,
+                    //   decoration: shadowFunction(),
+                    //   child: TextButton(
+                    //       onPressed: () {
+                    //         showAboutDialog(
+                    //             context: context,
+                    //             applicationName: "Lullaby",
+                    //             children: [Text("Version : 2.0.0")]);
+                    //       },
+                    //       child: Text(
+                    //         "Version 2.0.0",
+                    //         style: TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 18,
+                    //             fontWeight: FontWeight.normal),
+                    //       )),
+                    // ),
                   ],
                 ),
               ),

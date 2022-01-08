@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                               child: Container(
                                 height: 40,
                                 width: 370,
-                                decoration: BlueShadow(),
+                                decoration: ListShadow(),
                                 child: TextField(
                                   onChanged: (value) {
                                     searchtext = value;
@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     "Library",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey[500],
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     "Liked",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey[500],
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -163,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     "Settings",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey[500],
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -222,8 +222,7 @@ class HomeScreen extends StatelessWidget {
                                                 artist: element.artist)))
                                         .toList();
                                     return GestureDetector(
-                                      onTap: ()  {
-                                        // await assetsAudioPlayer.stop();
+                                      onTap: () {
                                         OpenAssetAudio().openAsset(
                                             index: index, audios: audioSongs);
                                         print(_controller.songs.length);
@@ -240,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             left: 8, right: 8, bottom: 13),
                                         child: Container(
-                                          decoration: BlueShadow(),
+                                          decoration: ListShadow(),
                                           child: ListTile(
                                             title: Text(
                                               results![index].title,
@@ -297,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                           child: Container(
                             width: 377,
                             height: 80,
-                            decoration: BlueShadow(),
+                            decoration: ListShadow(),
                             child: ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -395,8 +394,48 @@ class HomeScreen extends StatelessWidget {
 ////////////////////// Box Decoration//////////////////////////////////////////////////////////
   BoxDecoration BlueShadow() {
     return BoxDecoration(
-        // color: Colors.grey[200],
-        color: Color(0XFFEFF3F6),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffE4E5E6),
+            Color(0xff00416A),
+            Color(0xff928DAB),
+            // Color(0xffE4E5E6),
+            // Color(0xff00416A),
+            // Color(0xff928DAB),
+            // Color(0xffE4E5E6),
+            // Color(0xff00416A),
+            // Color(0xff928DAB),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.blueGrey,
+            offset: Offset(4.0, 4.0),
+            blurRadius: 15.0,
+            spreadRadius: 1.0,
+          ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4.0, -4.0),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+          )
+        ]);
+  }
+
+  BoxDecoration ListShadow() {
+    return BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xff00416A),
+            Color(0xff928DAB),
+          ],
+        ),
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
