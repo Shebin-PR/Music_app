@@ -69,7 +69,7 @@ class BottomPopUp extends StatelessWidget {
                                           .isEmpty
                                       ? IconButton(
                                           icon: Icon(
-                                            Icons.add,
+                                            Icons.add_circle_outline_outlined,
                                             color: Colors.blueGrey,
                                             size: 30,
                                           ),
@@ -85,13 +85,22 @@ class BottomPopUp extends StatelessWidget {
                                             await playlist.put(
                                                 playlistname[ind],
                                                 playlistSongs);
-
                                             _controller.update();
+                                            Get.back();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Song added to $playlistname",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              backgroundColor: Colors.grey[900],
+                                            ));
                                           },
                                         )
                                       : IconButton(
                                           icon: Icon(
-                                            Icons.minimize,
+                                            Icons.remove_circle_outline,
                                             color: Colors.blueGrey,
                                             size: 30,
                                           ),
@@ -104,7 +113,16 @@ class BottomPopUp extends StatelessWidget {
                                             box.put(playlistname[ind],
                                                 playlistSongs);
 
-                                            // setState(() {});
+                                            Get.back();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Song removed from $playlistname",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              backgroundColor: Colors.grey[900],
+                                            ));
                                           },
                                         ),
                                 ),

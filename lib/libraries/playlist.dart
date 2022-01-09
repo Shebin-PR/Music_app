@@ -138,11 +138,11 @@ class PlaylistSongs extends StatelessWidget {
                                       child: TextButton(
                                         child: Text("Remove"),
                                         onPressed: () {
-                                          y.removeWhere(
-                                            (element) =>
-                                                element.id.toString() ==
-                                                y[ind].id.toString(),
-                                          );
+                                          // y.removeWhere(
+                                          //   (element) =>
+                                          //       element.id.toString() ==
+                                          //       y[ind].id.toString(),
+                                          // );
                                           Navigator.pop(context);
                                           _controller.update();
                                         },
