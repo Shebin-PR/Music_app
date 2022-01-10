@@ -64,7 +64,7 @@ class PlayScreen extends StatelessWidget {
                                 },
                                 icon: const Icon(
                                   Icons.library_music_rounded,
-                                  color: Colors.black,
+                                  color: Colors.lightBlueAccent,
                                 )),
                           ),
                           Container(
@@ -76,7 +76,7 @@ class PlayScreen extends StatelessWidget {
                                   },
                                   icon: const Icon(
                                     Icons.keyboard_arrow_down_sharp,
-                                    color: Colors.black,
+                                    color: Colors.lightBlueAccent,
                                     size: 30,
                                   ))),
                         ],
@@ -194,7 +194,7 @@ class PlayScreen extends StatelessWidget {
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back_ios_new_sharp,
-                                  color: Colors.black,
+                                  color: Colors.lightBlueAccent,
                                 )),
                           ),
                           PlayerBuilder.isPlaying(
@@ -213,6 +213,7 @@ class PlayScreen extends StatelessWidget {
                                             ? Icons.pause_rounded
                                             : Icons.play_arrow_rounded,
                                         size: 32,
+                                        color: Colors.lightBlueAccent,
                                       )),
                                 );
                               }),
@@ -224,7 +225,7 @@ class PlayScreen extends StatelessWidget {
                               },
                               icon: const Icon(
                                 Icons.arrow_forward_ios_sharp,
-                                color: Colors.black,
+                                color: Colors.lightBlueAccent,
                               ),
                             ),
                           ),
@@ -255,7 +256,37 @@ class PlayScreen extends StatelessWidget {
                                 },
                                 icon: const Icon(
                                   Icons.playlist_add_sharp,
-                                  color: Colors.black,
+                                  color: Colors.lightBlueAccent,
+                                )),
+                          ),
+
+                          //////////////////////
+                          ///
+                          SizedBox(
+                            width: 100,
+                          ),
+                          ////////////////////////
+                          ///
+                          Container(
+                            height: 55,
+                            width: 55,
+                            decoration: imageshadowss(),
+                            child: IconButton(
+                                onPressed: () {
+                                  if (audio.isNotEmpty) {
+                                    var ply = audio.firstWhere((element) =>
+                                        element.id.toString() ==
+                                        myAudios.metas.id.toString());
+
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) =>
+                                            BottomPopUp(audio: ply));
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.favorite_outline,
+                                  color: Colors.lightBlueAccent,
                                 )),
                           ),
                         ],
@@ -289,8 +320,9 @@ class PlayScreen extends StatelessWidget {
 
   BoxDecoration imageshadowss() {
     return BoxDecoration(
-      color: Color.fromRGBO(217, 230, 243, 1),
-      borderRadius: BorderRadius.circular(10),
-    );
+        color: Colors.lightBlueAccent[500],
+        // color: Color.fromRGBO(217, 230, 243, 1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.lightBlueAccent));
   }
 }
