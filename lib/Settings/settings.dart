@@ -159,8 +159,11 @@ class Settings extends StatelessWidget {
 
                     //////////////////////version////////////////////////////////////////
 
-                    Center(
-                      heightFactor: 25,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 130,
+                        vertical: 200,
+                      ),
                       child: Text(
                         "Version 2.0.0",
                         style: TextStyle(fontSize: 20),

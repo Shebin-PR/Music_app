@@ -294,9 +294,9 @@ class HomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               bottom: 5, left: 2, right: 2),
                           child: Container(
-                            width: 377,
+                            width: 394,
                             height: 80,
-                            decoration: ListShadow(),
+                            decoration: BottomShadow(),
                             child: ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -308,7 +308,7 @@ class HomeScreen extends StatelessWidget {
                               },
                               title: Text(
                                 myAudios.metas.title!,
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Colors.black,
@@ -448,5 +448,19 @@ class HomeScreen extends StatelessWidget {
             spreadRadius: 1.0,
           )
         ]);
+  }
+
+  BoxDecoration BottomShadow() {
+    return BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color(0xff283c86),
+          Color(0xff45a247),
+        ],
+      ),
+      borderRadius: BorderRadius.circular(10),
+    );
   }
 }

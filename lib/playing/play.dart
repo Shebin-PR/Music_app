@@ -137,7 +137,7 @@ class PlayScreen extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: Colors.black,
+                              color: Colors.blueGrey[500],
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
@@ -171,10 +171,10 @@ class PlayScreen extends StatelessWidget {
                             onSeek: (to) {
                               assetsAudioPlayer.seek(to);
                             },
-                            thumbColor: Colors.grey[600],
-                            baseBarColor: Colors.grey[700],
-                            thumbGlowColor: Colors.grey[800],
-                            progressBarColor: Colors.grey[800],
+                            thumbColor: Colors.blue[800],
+                            baseBarColor: Colors.lightBlueAccent,
+                            thumbGlowColor: Colors.blueGrey,
+                            progressBarColor: Colors.lightBlue[900],
                           ),
                         );
                       }),
@@ -298,25 +298,25 @@ class PlayScreen extends StatelessWidget {
             })));
   }
 
-  BoxDecoration progressDecoration() {
-    return BoxDecoration(
-      color: Colors.blueGrey[200],
-      borderRadius: BorderRadius.circular(10),
-      boxShadow: [
-        BoxShadow(
-          blurRadius: 1,
-          offset: Offset(-5, -5),
-          color: Colors.transparent,
-        ),
-        BoxShadow(
-          blurRadius: 5,
-          offset: Offset(17.5, 17.5),
-          color: Colors.blueGrey,
-          // color: Color.fromRGBO(214, 223, 230, 1),
-        )
-      ],
-    );
-  }
+  // BoxDecoration progressDecoration() {
+  //   return BoxDecoration(
+  //     color: Colors.black,
+  //     borderRadius: BorderRadius.circular(10),
+  //     boxShadow: [
+  //       BoxShadow(
+  //         blurRadius: 1,
+  //         offset: Offset(-5, -5),
+  //         color: Colors.transparent,
+  //       ),
+  //       BoxShadow(
+  //         blurRadius: 5,
+  //         offset: Offset(17.5, 17.5),
+  //         color: Colors.blueGrey,
+  //         // color: Color.fromRGBO(214, 223, 230, 1),
+  //       )
+  //     ],
+  //   );
+  // }
 
   BoxDecoration imageshadowss() {
     return BoxDecoration(
